@@ -36,8 +36,8 @@
     "setupTestFrameworkScriptFile": "jest-extended"
   },
   "dependencies": {
-    "collectio-hashmap": "1.0.0",
-    "collectio-hashset": "1.0.0",
-    "equality-comparison": "1.0.0"
+    "collectio-hashmap": "1.0.1",
+    "collectio-hashset": "1.0.1",
+    "equality-comparison": "1.0.1"
   }
 }
