@@ -1,4 +1,3 @@
-require("./iterators/fromIterator");
 require("./iterators/selectIterator");
 require("./iterators/selectManyIterator");
 require("./iterators/whereIterator");

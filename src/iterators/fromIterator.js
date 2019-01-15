@@ -1,6 +1,14 @@
 const Manipula = require("../manipula");
 
-class FromIterator extends Manipula {
+/**
+ * Class for wrapping original itarable
+ * @extends Manipula
+ */
+module.exports = class FromIterator extends Manipula {
+  /**
+   * Create wrapper for iterable.
+   * @param {Iterable<any>} source Iterable for wrapping.
+   */
   constructor(source) {
     super();
     this._source = source;
@@ -11,11 +19,11 @@ class FromIterator extends Manipula {
       });
   }
 
+  /**
+   * Method returns a new Iterator contains sequence from original iterable.
+   * @returns {Iterable<any>} A new Iterator contains sequence from original iterable.
+   */
   *[Symbol.iterator]() {
-    for (const element of this._source) yield element;
+    yield* this._source;
   }
-}
-
-Manipula.from = function(iterable) {
-  return new FromIterator(iterable);
 };

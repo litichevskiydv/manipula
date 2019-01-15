@@ -2,9 +2,21 @@ const HashSet = require("collectio-hashset");
 const HashMap = require("collectio-hashmap");
 const DefaultEqualityComparer = require("equality-comparison");
 
+/**
+ * Class providing LINQ functionality
+ */
 module.exports = class Manipula {
   static get _lengthPropertyName() {
     return "length";
+  }
+
+  /**
+   * Method wraps iterable for extending its functionality.
+   * @param {Iterable<any>} source Iterable for wrapping.
+   */
+  static from(source) {
+    const FromIterator = require("./iterators/fromIterator");
+    return new FromIterator(source);
   }
 
   count(predicate) {
