@@ -1,7 +1,7 @@
 const Manipula = require("../manipula");
 
 /**
- * Class representing ierable whose elements are the results of invoking the transform function on each element of source iterable.
+ * Class representing iterable whose elements are the results of invoking the transform function on each element of source iterable.
  * @extends Manipula
  */
 module.exports = class SelectIterator extends Manipula {

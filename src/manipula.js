@@ -33,6 +33,21 @@ module.exports = class Manipula {
     return new SelectIterator(this, selector);
   }
 
+  /**
+   * @callback selectManyCallback
+   * @param {*} element The element of an iterable.
+   * @param {number} elementNumber Number of the iterable element.
+   * @returns {Iterable<any>} Element transformation result.
+   */
+
+  /**
+   * Method projects each element of an iterable into new Iterable<any> and flattens the resulting iterables into one iterable.
+   * @param {selectCallback} selector A transform function to apply to each source element.
+   */
+  selectMany(selector) {
+    return new SelectManyIterator(this, selector);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -248,3 +263,4 @@ module.exports = class Manipula {
 
 const FromIterator = require("./iterators/fromIterator");
 const SelectIterator = require("./iterators/selectIterator");
+const SelectManyIterator = require("./iterators/selectManyIterator");
