@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class SelectIterator extends Manipula {
+/**
+ * Class representing ierable whose elements are the results of invoking the transform function on each element of source iterable.
+ * @extends Manipula
+ */
+module.exports = class SelectIterator extends Manipula {
   constructor(source, selector) {
     super();
     this._source = source;
@@ -16,8 +20,4 @@ class SelectIterator extends Manipula {
     let i = 0;
     for (const element of this._source) yield this._selector(element, i++);
   }
-}
-
-Manipula.prototype.select = function(selector) {
-  return new SelectIterator(this, selector);
 };

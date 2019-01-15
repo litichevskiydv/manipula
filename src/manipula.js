@@ -15,8 +15,22 @@ module.exports = class Manipula {
    * @param {Iterable<any>} source Iterable for wrapping.
    */
   static from(source) {
-    const FromIterator = require("./iterators/fromIterator");
     return new FromIterator(source);
+  }
+
+  /**
+   * @callback selectCallback
+   * @param {*} element The element of an iterable.
+   * @param {number} elementNumber Number of the iterable element.
+   * @returns {*} Element transformation result.
+   */
+
+  /**
+   * Method projects each element of an iterable into new form.
+   * @param {selectCallback} selector A transform function to apply to each source element.
+   */
+  select(selector) {
+    return new SelectIterator(this, selector);
   }
 
   count(predicate) {
@@ -231,3 +245,6 @@ module.exports = class Manipula {
     return firstState.done && secondState.done;
   }
 };
+
+const FromIterator = require("./iterators/fromIterator");
+const SelectIterator = require("./iterators/selectIterator");
