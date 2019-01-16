@@ -19,7 +19,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback selectCallback
+   * @callback selectSelector
    * @param {*} element The element of an iterable.
    * @param {number} elementNumber Number of the iterable element.
    * @returns {*} Element transformation result.
@@ -27,14 +27,14 @@ module.exports = class Manipula {
 
   /**
    * Method projects each element of an iterable into new form.
-   * @param {selectCallback} selector A transform function to apply to each source element.
+   * @param {selectSelector} selector A transform function to apply to each source element.
    */
   select(selector) {
     return new SelectIterator(this, selector);
   }
 
   /**
-   * @callback selectManyCallback
+   * @callback selectManySelector
    * @param {*} element The element of an iterable.
    * @param {number} elementNumber Number of the iterable element.
    * @returns {Iterable<any>} Element transformation result.
@@ -42,10 +42,25 @@ module.exports = class Manipula {
 
   /**
    * Method projects each element of an iterable into new Iterable<any> and flattens the resulting iterables into one iterable.
-   * @param {selectManyCallback} selector A transform function to apply to each source element.
+   * @param {selectManySelector} selector A transform function to apply to each source element.
    */
   selectMany(selector) {
     return new SelectManyIterator(this, selector);
+  }
+
+  /**
+   * @callback wherePredicate
+   * @param {*} element The element of an iterable.
+   * @param {number} elementNumber Number of the iterable element.
+   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
+   */
+
+  /**
+   * Method filters an iterable based on a predicate.
+   * @param {wherePredicate} predicate A function to test each source element and its number for a condition.
+   */
+  where(predicate) {
+    return new WhereIterator(this, predicate);
   }
 
   count(predicate) {
@@ -264,3 +279,4 @@ module.exports = class Manipula {
 const FromIterator = require("./iterators/fromIterator");
 const SelectIterator = require("./iterators/selectIterator");
 const SelectManyIterator = require("./iterators/selectManyIterator");
+const WhereIterator = require("./iterators/whereIterator");
