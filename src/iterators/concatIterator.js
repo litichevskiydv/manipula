@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class ConcatIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of concatenation source iterable and given.
+ * @extends Manipula
+ */
+module.exports = class ConcatIterator extends Manipula {
   constructor(first, second) {
     super();
     this._first = first;
@@ -11,8 +15,4 @@ class ConcatIterator extends Manipula {
     yield* this._first;
     yield* this._second;
   }
-}
-
-Manipula.prototype.concat = function(second) {
-  return new ConcatIterator(this, second);
 };

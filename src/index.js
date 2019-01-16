@@ -1,4 +1,3 @@
-require("./iterators/concatIterator");
 require("./iterators/unionIterator");
 require("./iterators/exceptIterator");
 require("./iterators/intersectIterator");

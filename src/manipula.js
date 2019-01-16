@@ -63,6 +63,14 @@ module.exports = class Manipula {
     return new WhereIterator(this, predicate);
   }
 
+  /**
+   * Methods adds given iterable to current.
+   * @param {Iterable<any>} second The iterable to concatenate to the current.
+   */
+  concat(second) {
+    return new ConcatIterator(this, second);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -280,3 +288,4 @@ const FromIterator = require("./iterators/fromIterator");
 const SelectIterator = require("./iterators/selectIterator");
 const SelectManyIterator = require("./iterators/selectManyIterator");
 const WhereIterator = require("./iterators/whereIterator");
+const ConcatIterator = require("./iterators/concatIterator");
