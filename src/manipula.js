@@ -42,7 +42,7 @@ module.exports = class Manipula {
 
   /**
    * Method projects each element of an iterable into new Iterable<any> and flattens the resulting iterables into one iterable.
-   * @param {selectCallback} selector A transform function to apply to each source element.
+   * @param {selectManyCallback} selector A transform function to apply to each source element.
    */
   selectMany(selector) {
     return new SelectManyIterator(this, selector);
