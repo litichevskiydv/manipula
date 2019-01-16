@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class AppendIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of appending given value to the end of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class AppendIterator extends Manipula {
   constructor(source, element) {
     super();
     this._source = source;
@@ -11,8 +15,4 @@ class AppendIterator extends Manipula {
     yield* this._source;
     yield this._element;
   }
-}
-
-Manipula.prototype.append = function(element) {
-  return new AppendIterator(this, element);
 };
