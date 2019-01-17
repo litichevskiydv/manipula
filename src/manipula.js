@@ -87,6 +87,14 @@ module.exports = class Manipula {
     return new PrependIterator(this, element);
   }
 
+  /**
+   * Method bypasses a specified number of elements in a iterable and then returns the remaining elements.
+   * @param {number} count The number of elements to skip before returning the remaining elements.
+   */
+  skip(count) {
+    return new SkipIterator(this, count);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -307,3 +315,4 @@ const WhereIterator = require("./iterators/whereIterator");
 const ConcatIterator = require("./iterators/concatIterator");
 const AppendIterator = require("./iterators/appendIterator");
 const PrependIterator = require("./iterators/prependIterator");
+const SkipIterator = require("./iterators/skipIterator");

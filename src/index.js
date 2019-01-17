@@ -3,7 +3,6 @@ require("./iterators/exceptIterator");
 require("./iterators/intersectIterator");
 require("./iterators/distinctIterator");
 require("./iterators/groupByIterator");
-require("./iterators/skipIterator");
 require("./iterators/takeIterator");
 require("./iterators/skipWhileIterator");
 require("./iterators/takeWhileIterator");
