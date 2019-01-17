@@ -95,6 +95,14 @@ module.exports = class Manipula {
     return new SkipIterator(this, count);
   }
 
+  /**
+   * Returns a specified number of contiguous elements from the start of a iterable.
+   * @param {number} count The number of elements to return.
+   */
+  take(count) {
+    return new TakeIterator(this, count);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -316,3 +324,4 @@ const ConcatIterator = require("./iterators/concatIterator");
 const AppendIterator = require("./iterators/appendIterator");
 const PrependIterator = require("./iterators/prependIterator");
 const SkipIterator = require("./iterators/skipIterator");
+const TakeIterator = require("./iterators/takeIterator");

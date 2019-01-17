@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class TakeIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of taking given number of contiguous elements from the start of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class TakeIterator extends Manipula {
   constructor(source, count) {
     super();
     this._source = source;
@@ -11,8 +15,4 @@ class TakeIterator extends Manipula {
     let i = 0;
     for (const element of this._source) if (i++ < this._count) yield element;
   }
-}
-
-Manipula.prototype.take = function(count) {
-  return new TakeIterator(this, count);
 };
