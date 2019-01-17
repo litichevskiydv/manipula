@@ -79,6 +79,14 @@ module.exports = class Manipula {
     return new AppendIterator(this, element);
   }
 
+  /**
+   * Method adds a value to the beginning of the current iterable.
+   * @param {*} element The value to prepend to current iterable.
+   */
+  prepend(element) {
+    return new PrependIterator(this, element);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -298,3 +306,4 @@ const SelectManyIterator = require("./iterators/selectManyIterator");
 const WhereIterator = require("./iterators/whereIterator");
 const ConcatIterator = require("./iterators/concatIterator");
 const AppendIterator = require("./iterators/appendIterator");
+const PrependIterator = require("./iterators/prependIterator");

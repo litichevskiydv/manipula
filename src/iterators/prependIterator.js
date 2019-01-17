@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class PrependIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of adding given value to the beginning of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class PrependIterator extends Manipula {
   constructor(source, element) {
     super();
     this._source = source;
@@ -11,8 +15,4 @@ class PrependIterator extends Manipula {
     yield this._element;
     yield* this._source;
   }
-}
-
-Manipula.prototype.prepend = function(element) {
-  return new PrependIterator(this, element);
 };
