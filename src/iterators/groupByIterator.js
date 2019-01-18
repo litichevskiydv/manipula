@@ -1,6 +1,3 @@
-require("./fromIterator");
-require("./selectIterator");
-
 const Manipula = require("../manipula");
 const HashMap = require("collectio-hashmap");
 const { DefaultEqualityComparer } = require("equality-comparison");
