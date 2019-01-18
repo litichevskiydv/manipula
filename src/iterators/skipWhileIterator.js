@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class SkipWhileIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of skipping elements of the source iterable while they satisfy the given predicate.
+ * @extends Manipula
+ */
+module.exports = class SkipWhileIterator extends Manipula {
   constructor(source, predicate) {
     super();
     this._source = source;
@@ -16,8 +20,4 @@ class SkipWhileIterator extends Manipula {
     );
     for (; currentState.done === false; currentState = iterator.next()) yield currentState.value;
   }
-}
-
-Manipula.prototype.skipWhile = function(predicate) {
-  return new SkipWhileIterator(this, predicate);
 };

@@ -96,11 +96,26 @@ module.exports = class Manipula {
   }
 
   /**
-   * Returns a specified number of contiguous elements from the start of a iterable.
+   * Method returns a specified number of contiguous elements from the start of a iterable.
    * @param {number} count The number of elements to return.
    */
   take(count) {
     return new TakeIterator(this, count);
+  }
+
+  /**
+   * @callback skipWhilePredicate
+   * @param {*} element The element of an iterable.
+   * @param {number} elementNumber Number of the iterable element.
+   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
+   */
+
+  /**
+   * Method bypasses elements in an iterable as long as a specified condition is true and then returns the remaining elements.
+   * @param {skipWhilePredicate} predicate A function to test each source element and its number for a condition.
+   */
+  skipWhile(predicate) {
+    return new SkipWhileIterator(this, predicate);
   }
 
   count(predicate) {
@@ -325,3 +340,4 @@ const AppendIterator = require("./iterators/appendIterator");
 const PrependIterator = require("./iterators/prependIterator");
 const SkipIterator = require("./iterators/skipIterator");
 const TakeIterator = require("./iterators/takeIterator");
+const SkipWhileIterator = require("./iterators/skipWhileIterator");
