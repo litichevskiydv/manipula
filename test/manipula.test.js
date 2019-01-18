@@ -923,19 +923,19 @@ describe("Should test skipWhile", () => {
 describe("Should test takeWhile", () => {
   const testCases = [
     {
-      toString: () => "Take all elements",
-      source: Manipula.from([1, 2, 3]),
+      toString: () => "Takes first three elements",
+      source: Manipula.from([1, 2, 3, 5, 1, 2]).,
       predicate: x => x < 4,
       expected: [1, 2, 3]
     },
     {
-      toString: () => "Take nothing",
+      toString: () => "Takes nothing",
       source: Manipula.from([1, 2, 3]),
       predicate: x => x > 4,
       expected: []
     },
     {
-      toString: () => "Take two elements",
+      toString: () => "Takes two elements",
       source: Manipula.from([1, 2, 3]),
       predicate: (x, i) => x + i <= 3,
       expected: [1, 2]

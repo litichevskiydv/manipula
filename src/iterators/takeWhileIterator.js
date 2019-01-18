@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class TakeWhileIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are taken from the source iterable as long as a given condition is true.
+ * @extends Manipula
+ */
+module.exports = class TakeWhileIterator extends Manipula {
   constructor(source, predicate) {
     super();
     this._source = source;
@@ -16,8 +20,4 @@ class TakeWhileIterator extends Manipula {
     )
       yield currentState.value;
   }
-}
-
-Manipula.prototype.takeWhile = function(predicate) {
-  return new TakeWhileIterator(this, predicate);
 };

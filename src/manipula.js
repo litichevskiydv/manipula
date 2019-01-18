@@ -49,7 +49,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback wherePredicate
+   * @callback logicalPredicate
    * @param {*} element The element of an iterable.
    * @param {number} elementNumber Number of the iterable element.
    * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
@@ -57,7 +57,7 @@ module.exports = class Manipula {
 
   /**
    * Method filters an iterable based on a predicate.
-   * @param {wherePredicate} predicate A function to test each source element and its number for a condition.
+   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
    */
   where(predicate) {
     return new WhereIterator(this, predicate);
@@ -104,18 +104,19 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback skipWhilePredicate
-   * @param {*} element The element of an iterable.
-   * @param {number} elementNumber Number of the iterable element.
-   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
-   */
-
-  /**
    * Method bypasses elements in an iterable as long as a specified condition is true and then returns the remaining elements.
-   * @param {skipWhilePredicate} predicate A function to test each source element and its number for a condition.
+   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
    */
   skipWhile(predicate) {
     return new SkipWhileIterator(this, predicate);
+  }
+
+  /**
+   * Method returns elements from an iterable as long as a specified condition is true, and then skips the remaining elements.
+   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
+   */
+  takeWhile(predicate) {
+    return new TakeWhileIterator(this, predicate);
   }
 
   count(predicate) {
@@ -341,3 +342,4 @@ const PrependIterator = require("./iterators/prependIterator");
 const SkipIterator = require("./iterators/skipIterator");
 const TakeIterator = require("./iterators/takeIterator");
 const SkipWhileIterator = require("./iterators/skipWhileIterator");
+const TakeWhileIterator = require("./iterators/takeWhileIterator");
