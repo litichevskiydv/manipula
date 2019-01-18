@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class SkipLastIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of skipping given number of elements from the end of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class SkipLastIterator extends Manipula {
   constructor(source, count) {
     super();
     this._source = source;
@@ -21,8 +25,4 @@ class SkipLastIterator extends Manipula {
         else queue.push(currentState.value);
     }
   }
-}
-
-Manipula.prototype.skipLast = function(count) {
-  return new SkipLastIterator(this, count);
 };

@@ -6,7 +6,6 @@ require("./iterators/groupByIterator");
 require("./iterators/reverseIterator");
 require("./iterators/repeatIterator");
 require("./iterators/rangeIterator");
-require("./iterators/skipLastIterator");
 require("./iterators/takeLastIterator");
 require("./iterators/orderByIterator");
 
