@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class TakeLastIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the results of taking given number of elements from the end of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class TakeLastIterator extends Manipula {
   constructor(source, count) {
     super();
     this._source = source;
@@ -22,8 +26,4 @@ class TakeLastIterator extends Manipula {
 
     for (const element of queue) yield element;
   }
-}
-
-Manipula.prototype.takeLast = function(count) {
-  return new TakeLastIterator(this, count);
 };

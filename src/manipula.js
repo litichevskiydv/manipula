@@ -127,6 +127,14 @@ module.exports = class Manipula {
     return new SkipLastIterator(this, count);
   }
 
+  /**
+   * Method returns a specified number of contiguous elements from the end of an iterable.
+   * @param {number} count The number of elements to return.
+   */
+  takeLast(count) {
+    return new TakeLastIterator(this, count);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -352,3 +360,4 @@ const TakeIterator = require("./iterators/takeIterator");
 const SkipWhileIterator = require("./iterators/skipWhileIterator");
 const TakeWhileIterator = require("./iterators/takeWhileIterator");
 const SkipLastIterator = require("./iterators/skipLastIterator");
+const TakeLastIterator = require("./iterators/takeLastIterator");
