@@ -924,7 +924,7 @@ describe("Should test takeWhile", () => {
   const testCases = [
     {
       toString: () => "Takes first three elements",
-      source: Manipula.from([1, 2, 3, 5, 1, 2]).,
+      source: Manipula.from([1, 2, 3, 5, 1, 2]),
       predicate: x => x < 4,
       expected: [1, 2, 3]
     },
