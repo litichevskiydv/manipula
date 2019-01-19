@@ -171,11 +171,20 @@ module.exports = class Manipula {
    */
 
   /**
-   * Method returns distinct elements from a sequence.
-   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare values.
+   * Method returns distinct elements from an iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
    */
   distinct(comparer) {
     return new DistinctIterator(this, comparer);
+  }
+
+  /**
+   * Method returns differences between current and given iterables.
+   * @param {Iterable<any>} second An iterable whose elements that also occur in the first iterable will cause those elements to be removed from the returned iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   */
+  except(second, comparer) {
+    return new ExceptIterator(this, second, comparer);
   }
 
   count(predicate) {
@@ -408,3 +417,4 @@ const RangeIterator = require("./iterators/rangeIterator");
 const RepeatIterator = require("./iterators/repeatIterator");
 const ReverseIterator = require("./iterators/reverseIterator");
 const DistinctIterator = require("./iterators/distinctIterator");
+const ExceptIterator = require("./iterators/exceptIterator");

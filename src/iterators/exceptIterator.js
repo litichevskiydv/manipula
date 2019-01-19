@@ -2,7 +2,11 @@ const Manipula = require("../manipula");
 const HashSet = require("collectio-hashset");
 const { DefaultEqualityComparer } = require("equality-comparison");
 
-class ExceptIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are differences between current and given iterables.
+ * @extends Manipula
+ */
+module.exports = class ExceptIterator extends Manipula {
   constructor(first, second, comparer) {
     super();
     this._first = first;
@@ -20,8 +24,4 @@ class ExceptIterator extends Manipula {
         yield element;
       }
   }
-}
-
-Manipula.prototype.except = function(second, comparer) {
-  return new ExceptIterator(this, second, comparer);
 };
