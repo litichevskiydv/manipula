@@ -2,7 +2,11 @@ const Manipula = require("../manipula");
 const HashSet = require("collectio-hashset");
 const { DefaultEqualityComparer } = require("equality-comparison");
 
-class IntersectIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are intersection between current and given iterables.
+ * @extends Manipula
+ */
+module.exports = class IntersectIterator extends Manipula {
   constructor(first, second, comparer) {
     super();
     this._first = first;
@@ -16,8 +20,4 @@ class IntersectIterator extends Manipula {
 
     for (const element of this._first) if (set.delete(element) === true) yield element;
   }
-}
-
-Manipula.prototype.intersect = function(second, comparer) {
-  return new IntersectIterator(this, second, comparer);
 };
