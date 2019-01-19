@@ -146,6 +146,17 @@ module.exports = class Manipula {
     return new RangeIterator(start, count);
   }
 
+  /**
+   * Method generates an iterable that contains one repeated value.
+   * @param {*} element The value to be repeated.
+   * @param {number} count The number of times to repeat the value in the generated iterable.
+   */
+  static repeat(element, count) {
+    if (count < 0) throw new Error("Count mustn't be negative");
+
+    return new RepeatIterator(element, count);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -373,3 +384,4 @@ const TakeWhileIterator = require("./iterators/takeWhileIterator");
 const SkipLastIterator = require("./iterators/skipLastIterator");
 const TakeLastIterator = require("./iterators/takeLastIterator");
 const RangeIterator = require("./iterators/rangeIterator");
+const RepeatIterator = require("./iterators/repeatIterator");
