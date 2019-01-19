@@ -2,7 +2,11 @@ const Manipula = require("../manipula");
 const HashMap = require("collectio-hashmap");
 const { DefaultEqualityComparer } = require("equality-comparison");
 
-class GroupByIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are results of grouping of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class GroupByIterator extends Manipula {
   constructor(source, keySelector, elementSelector, comparer) {
     super();
     this._source = source;
@@ -32,9 +36,4 @@ class GroupByIterator extends Manipula {
       yield values;
     }
   }
-}
-
-Manipula.prototype.groupBy = function(keySelector, options) {
-  const opt = options || {};
-  return new GroupByIterator(this, keySelector, opt.elementSelector, opt.comparer);
 };

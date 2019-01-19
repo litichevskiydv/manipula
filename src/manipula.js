@@ -205,6 +205,34 @@ module.exports = class Manipula {
     return new UnionIterator(this, second, comparer);
   }
 
+  /**
+   * @callback groupByKeySelector
+   * @param {*} element The element of the source iterable.
+   * @returns {*} Key for grouping.
+   */
+
+  /**
+   * @callback groupByElementSelector
+   * @param {*} element The element of of the source iterable.
+   * @returns {*} Element of a group.
+   */
+
+  /**
+   * @typedef {Object} GroupByOptions
+   * @property {groupByElementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+   * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
+   */
+
+  /**
+   * Method groups the elements of an iterable.
+   * @param {groupByKeySelector} keySelector A function to extract the key for each element.
+   * @param {GroupByOptions} [options] Grouping settings.
+   */
+  groupBy(keySelector, options) {
+    const opt = options || {};
+    return new GroupByIterator(this, keySelector, opt.elementSelector, opt.comparer);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -438,3 +466,4 @@ const DistinctIterator = require("./iterators/distinctIterator");
 const ExceptIterator = require("./iterators/exceptIterator");
 const IntersectIterator = require("./iterators/intersectIterator");
 const UnionIterator = require("./iterators/unionIterator");
+const GroupByIterator = require("./iterators/groupByIterator");
