@@ -2,7 +2,11 @@ const Manipula = require("../manipula");
 const HashSet = require("collectio-hashset");
 const { DefaultEqualityComparer } = require("equality-comparison");
 
-class DistinctIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are the distinct elements of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class DistinctIterator extends Manipula {
   constructor(source, comparer) {
     super();
     this._source = source;
@@ -18,8 +22,4 @@ class DistinctIterator extends Manipula {
         yield element;
       }
   }
-}
-
-Manipula.prototype.distinct = function(comparer) {
-  return new DistinctIterator(this, comparer);
 };

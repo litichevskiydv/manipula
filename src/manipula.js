@@ -164,6 +164,20 @@ module.exports = class Manipula {
     return new ReverseIterator(this);
   }
 
+  /**
+   * @typedef {Object} EqualityComparer
+   * @property {function(any, any):boolean} equals Method for checking two objects equality.
+   * @property {function(any):number} getHashCode Method for calculating object hashcode.
+   */
+
+  /**
+   * Method returns distinct elements from a sequence.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare values.
+   */
+  distinct(comparer) {
+    return new DistinctIterator(this, comparer);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -393,3 +407,4 @@ const TakeLastIterator = require("./iterators/takeLastIterator");
 const RangeIterator = require("./iterators/rangeIterator");
 const RepeatIterator = require("./iterators/repeatIterator");
 const ReverseIterator = require("./iterators/reverseIterator");
+const DistinctIterator = require("./iterators/distinctIterator");
