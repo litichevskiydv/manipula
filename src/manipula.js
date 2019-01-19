@@ -157,6 +157,13 @@ module.exports = class Manipula {
     return new RepeatIterator(element, count);
   }
 
+  /**
+   * Method inverts the order of the elements in an iterable.
+   */
+  reverse() {
+    return new ReverseIterator(this);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -385,3 +392,4 @@ const SkipLastIterator = require("./iterators/skipLastIterator");
 const TakeLastIterator = require("./iterators/takeLastIterator");
 const RangeIterator = require("./iterators/rangeIterator");
 const RepeatIterator = require("./iterators/repeatIterator");
+const ReverseIterator = require("./iterators/reverseIterator");

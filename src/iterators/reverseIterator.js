@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class ReverseIterator extends Manipula {
+/**
+ * Class representing iterable which is an inversion of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class ReverseIterator extends Manipula {
   constructor(source) {
     super();
     this._source = source;
@@ -10,8 +14,4 @@ class ReverseIterator extends Manipula {
     const sourceArray = Array.from(this._source);
     for (let i = sourceArray.length - 1; i > -1; i--) yield sourceArray[i];
   }
-}
-
-Manipula.prototype.reverse = function() {
-  return new ReverseIterator(this);
 };
