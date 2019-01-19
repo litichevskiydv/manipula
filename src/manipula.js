@@ -188,12 +188,21 @@ module.exports = class Manipula {
   }
 
   /**
-   * Method returns intersection between current and given iterables.
+   * Method returns intersection between the current and given iterables.
    * @param {Iterable<any>} second An iterable whose distinct elements that also appear in the current iterable will be returned.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
    */
   intersect(second, comparer) {
     return new IntersectIterator(this, second, comparer);
+  }
+
+  /**
+   * Method returns union of the current and given iterables.
+   * @param {Iterable<any>} second An iterable whose distinct elements form the second set for the union.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   */
+  union(second, comparer) {
+    return new UnionIterator(this, second, comparer);
   }
 
   count(predicate) {
@@ -428,3 +437,4 @@ const ReverseIterator = require("./iterators/reverseIterator");
 const DistinctIterator = require("./iterators/distinctIterator");
 const ExceptIterator = require("./iterators/exceptIterator");
 const IntersectIterator = require("./iterators/intersectIterator");
+const UnionIterator = require("./iterators/unionIterator");

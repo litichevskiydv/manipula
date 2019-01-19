@@ -1,4 +1,3 @@
-require("./iterators/unionIterator");
 require("./iterators/groupByIterator");
 require("./iterators/orderByIterator");
 
