@@ -5,7 +5,6 @@ require("./iterators/distinctIterator");
 require("./iterators/groupByIterator");
 require("./iterators/reverseIterator");
 require("./iterators/repeatIterator");
-require("./iterators/rangeIterator");
 require("./iterators/orderByIterator");
 
 module.exports = require("./manipula");

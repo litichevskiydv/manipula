@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class RangeIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are integral numbers within a specified range.
+ * @extends Manipula
+ */
+module.exports = class RangeIterator extends Manipula {
   constructor(start, count) {
     super();
     this._start = start;
@@ -10,10 +14,4 @@ class RangeIterator extends Manipula {
   *[Symbol.iterator]() {
     for (let i = 0; i < this._count; i++) yield this._start + i;
   }
-}
-
-Manipula.range = function(start, count) {
-  if (count < 0) throw new Error("Count mustn't be negative");
-
-  return new RangeIterator(start, count);
 };

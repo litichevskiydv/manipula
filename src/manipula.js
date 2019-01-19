@@ -135,6 +135,17 @@ module.exports = class Manipula {
     return new TakeLastIterator(this, count);
   }
 
+  /**
+   * Method generates an iterable of integral numbers within a specified range.
+   * @param {number} start The value of the first integer in the iterable.
+   * @param {number} count The number of sequential integers to generate.
+   */
+  static range(start, count) {
+    if (count < 0) throw new Error("Count mustn't be negative");
+
+    return new RangeIterator(start, count);
+  }
+
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -361,3 +372,4 @@ const SkipWhileIterator = require("./iterators/skipWhileIterator");
 const TakeWhileIterator = require("./iterators/takeWhileIterator");
 const SkipLastIterator = require("./iterators/skipLastIterator");
 const TakeLastIterator = require("./iterators/takeLastIterator");
+const RangeIterator = require("./iterators/rangeIterator");
