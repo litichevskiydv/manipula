@@ -206,7 +206,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback groupByKeySelector
+   * @callback keySelector
    * @param {*} element The element of the source iterable.
    * @returns {*} Key for grouping.
    */
@@ -225,12 +225,37 @@ module.exports = class Manipula {
 
   /**
    * Method groups the elements of an iterable.
-   * @param {groupByKeySelector} keySelector A function to extract the key for each element.
+   * @param {keySelector} keySelector A function to extract the key for each element.
    * @param {GroupByOptions} [options] Grouping settings.
    */
   groupBy(keySelector, options) {
     const opt = options || {};
     return new GroupByIterator(this, keySelector, opt.elementSelector, opt.comparer);
+  }
+
+  /**
+   * @callback orderingCompareFunction
+   * @param {*} x The first object to compare.
+   * @param {*} y The second object to compare.
+   * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
+   */
+
+  /**
+   * Method sorts the elements of an iterable in ascending order.
+   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   */
+  orderBy(keySelector, compareFunction) {
+    return new OrderByIterator(this, keySelector, false, compareFunction);
+  }
+
+  /**
+   * Method sorts the elements of an iterable in descending order.
+   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   */
+  orderByDescending(keySelector, compareFunction) {
+    return new OrderByIterator(this, keySelector, true, compareFunction);
   }
 
   count(predicate) {
@@ -467,3 +492,4 @@ const ExceptIterator = require("./iterators/exceptIterator");
 const IntersectIterator = require("./iterators/intersectIterator");
 const UnionIterator = require("./iterators/unionIterator");
 const GroupByIterator = require("./iterators/groupByIterator");
+const OrderByIterator = require("./iterators/orderByIterator");

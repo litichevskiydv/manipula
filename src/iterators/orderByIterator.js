@@ -1,6 +1,10 @@
 const Manipula = require("../manipula");
 
-class OrderByIterator extends Manipula {
+/**
+ * Class representing iterable whose elements are results of ordering of the source iterable.
+ * @extends Manipula
+ */
+module.exports = class OrderByIterator extends Manipula {
   constructor(source, keySelector, sortByDescending, compareFunction) {
     super();
     this._source = source;
@@ -13,6 +17,24 @@ class OrderByIterator extends Manipula {
     ];
   }
 
+  /**
+   * @callback keySelector
+   * @param {*} element The element of the source iterable.
+   * @returns {*} Key for grouping.
+   */
+
+  /**
+   * @callback orderingCompareFunction
+   * @param {*} x The first object to compare.
+   * @param {*} y The second object to compare.
+   * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
+   */
+
+  /**
+   * Method performs a subsequent ordering of the elements in an iterable in ascending order.
+   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   */
   thenBy(keySelector, compareFunction) {
     this._comparers.push({
       keySelector: keySelector,
@@ -22,6 +44,11 @@ class OrderByIterator extends Manipula {
     return this;
   }
 
+  /**
+   * Method performs a subsequent ordering of the elements in a sequence in descending order.
+   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   */
   thenByDescending(keySelector, compareFunction) {
     this._comparers.push({
       keySelector: keySelector,
@@ -55,12 +82,4 @@ class OrderByIterator extends Manipula {
 
     for (const element of sourceArray) yield element;
   }
-}
-
-Manipula.prototype.orderBy = function(keySelector, compareFunction) {
-  return new OrderByIterator(this, keySelector, false, compareFunction);
-};
-
-Manipula.prototype.orderByDescending = function(keySelector, compareFunction) {
-  return new OrderByIterator(this, keySelector, true, compareFunction);
 };
