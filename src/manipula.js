@@ -258,6 +258,11 @@ module.exports = class Manipula {
     return new OrderByIterator(this, keySelector, true, compareFunction);
   }
 
+  /**
+   * Method returns a number that represents how many elements in an iterable satisfy the condition.
+   * @param {logicalPredicate} [predicate] A function to test each element for a condition.
+   * @returns {number}
+   */
   count(predicate) {
     if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
 
@@ -277,6 +282,10 @@ module.exports = class Manipula {
     return { found: false, element: null };
   }
 
+  /**
+   * Method returns the first element in an iterable that satisfies a specified condition.
+   * @param {logicalPredicate} [predicate] A function to test each element for a condition.
+   */
   first(predicate) {
     const searchResult = this._tryGetFirst(predicate);
     if (searchResult.found === true) return searchResult.element;
@@ -284,6 +293,10 @@ module.exports = class Manipula {
     throw new Error("No matching element was found");
   }
 
+  /**
+   * Method returns the first element of an iterable that satisfies a condition or null if no such element is found.
+   * @param {logicalPredicate} [predicate] A function to test each element for a condition.
+   */
   firstOrDefault(predicate) {
     return this._tryGetFirst(predicate).element;
   }
@@ -300,6 +313,10 @@ module.exports = class Manipula {
     return result;
   }
 
+  /**
+   * Method returns the last element of an iterable that satisfies a specified condition.
+   * @param {logicalPredicate} [predicate] A function to test each element for a condition.
+   */
   last(predicate) {
     const searchResult = this._tryGetLast(predicate);
     if (searchResult.found === true) return searchResult.element;
@@ -307,6 +324,10 @@ module.exports = class Manipula {
     throw new Error("No matching element was found");
   }
 
+  /**
+   * Method returns the last element of an iterable that satisfies a condition or null if no such element is found.
+   * @param {logicalPredicate} [predicate] A function to test each element for a condition.
+   */
   lastOrDefault(predicate) {
     return this._tryGetLast(predicate).element;
   }
@@ -325,6 +346,10 @@ module.exports = class Manipula {
     return { foundOnce: false, element: null };
   }
 
+  /**
+   * Method returns the only element of an iterable that satisfies a specified condition, and throws an exception if more than one such element exists.
+   * @param {logicalPredicate} [predicate] A function to test an element for a condition.
+   */
   single(predicate) {
     const searchResult = this._tryGetSingle(predicate);
 
@@ -333,6 +358,10 @@ module.exports = class Manipula {
     throw new Error("No matching element was found");
   }
 
+  /**
+   * Returns the only element of an iterable that satisfies a specified condition or null if no such element exists; this method throws an exception if more than one element satisfies the condition.
+   * @param {logicalPredicate} [predicate] A function to test an element for a condition.
+   */
   singleOrDefault(predicate) {
     const searchResult = this._tryGetSingle(predicate);
 
