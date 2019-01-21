@@ -212,14 +212,14 @@ module.exports = class Manipula {
    */
 
   /**
-   * @callback groupByElementSelector
+   * @callback elementSelector
    * @param {*} element The element of of the source iterable.
    * @returns {*} Element of a group.
    */
 
   /**
    * @typedef {Object} GroupByOptions
-   * @property {groupByElementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+   * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
    * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
    */
 
@@ -396,19 +396,29 @@ module.exports = class Manipula {
   }
 
   /**
-   *
+   * Determines whether an iterable contains a specified element.
    * @param {*} value The value to locate in the iterable.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {boolean}
    */
   contains(value, comparer) {
     for (const element of this) if (element === value || (comparer && comparer.equals(element, value))) return true;
     return false;
   }
 
+  /**
+   * Creates an array from an iterable
+   * @returns {Array<any>}
+   */
   toArray() {
     return Array.from(this);
   }
 
+  /**
+   * Creates a HashSet from an iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {HashSet}
+   */
   toSet(comparer) {
     const set = new HashSet(comparer || DefaultEqualityComparer);
     for (const element of this) set.add(element);
@@ -416,6 +426,18 @@ module.exports = class Manipula {
     return set;
   }
 
+  /**
+   * @typedef {Object} ToMapOptions
+   * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+   * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
+   */
+
+  /**
+   * Creates a HashMap from an iterable.
+   * @param {keySelector} keySelector A function to extract a key from each element.
+   * @param {ToMapOptions} [options] Convertation settings.
+   * @returns {HashMap}
+   */
   toMap(keySelector, options) {
     const opt = options || {};
     const map = new HashMap(opt.comparer || DefaultEqualityComparer);
