@@ -365,7 +365,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * Returns the only element of an iterable that satisfies a specified condition or null if no such element exists; this method throws an exception if more than one element satisfies the condition.
+   * Method returns the only element of an iterable that satisfies a specified condition or null if no such element exists; this method throws an exception if more than one element satisfies the condition.
    * @param {logicalPredicate} [predicate] A function to test an element for a condition.
    */
   singleOrDefault(predicate) {
@@ -375,16 +375,31 @@ module.exports = class Manipula {
     return searchResult.element;
   }
 
+  /**
+   * Method determines whether any element of an iterable satisfies a condition.
+   * @param {logicalPredicate} [predicate] A function to test an element for a condition.
+   * @returns {boolean}
+   */
   any(predicate) {
     for (const element of this) if (!predicate || predicate(element)) return true;
     return false;
   }
 
+  /**
+   * Method determines whether all elements of an iterable satisfy a condition.
+   * @param {logicalPredicate} predicate A function to test an element for a condition.
+   * @returns {boolean}
+   */
   all(predicate) {
     for (const element of this) if (!predicate(element)) return false;
     return true;
   }
 
+  /**
+   *
+   * @param {*} value The value to locate in the iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   */
   contains(value, comparer) {
     for (const element of this) if (element === value || (comparer && comparer.equals(element, value))) return true;
     return false;
