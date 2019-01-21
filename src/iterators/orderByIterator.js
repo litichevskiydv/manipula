@@ -20,7 +20,7 @@ module.exports = class OrderByIterator extends Manipula {
   /**
    * @callback keySelector
    * @param {*} element The element of the source iterable.
-   * @returns {*} Key for grouping.
+   * @returns {*} Key for element.
    */
 
   /**

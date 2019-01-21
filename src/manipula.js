@@ -49,7 +49,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback logicalPredicate
+   * @callback extendedLogicalPredicate
    * @param {*} element The element of an iterable.
    * @param {number} elementNumber Number of the iterable element.
    * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
@@ -57,7 +57,7 @@ module.exports = class Manipula {
 
   /**
    * Method filters an iterable based on a predicate.
-   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
    */
   where(predicate) {
     return new WhereIterator(this, predicate);
@@ -105,7 +105,7 @@ module.exports = class Manipula {
 
   /**
    * Method bypasses elements in an iterable as long as a specified condition is true and then returns the remaining elements.
-   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
    */
   skipWhile(predicate) {
     return new SkipWhileIterator(this, predicate);
@@ -113,7 +113,7 @@ module.exports = class Manipula {
 
   /**
    * Method returns elements from an iterable as long as a specified condition is true, and then skips the remaining elements.
-   * @param {logicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
    */
   takeWhile(predicate) {
     return new TakeWhileIterator(this, predicate);
@@ -208,7 +208,7 @@ module.exports = class Manipula {
   /**
    * @callback keySelector
    * @param {*} element The element of the source iterable.
-   * @returns {*} Key for grouping.
+   * @returns {*} Key for element.
    */
 
   /**
@@ -257,6 +257,12 @@ module.exports = class Manipula {
   orderByDescending(keySelector, compareFunction) {
     return new OrderByIterator(this, keySelector, true, compareFunction);
   }
+
+  /**
+   * @callback logicalPredicate
+   * @param {*} element The element of an iterable.
+   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
+   */
 
   /**
    * Method returns a number that represents how many elements in an iterable satisfy the condition.
