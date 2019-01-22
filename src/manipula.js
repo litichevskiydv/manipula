@@ -180,7 +180,7 @@ module.exports = class Manipula {
 
   /**
    * Method groups the elements of an iterable.
-   * @param {keySelector} keySelector A function to extract the key for each element.
+   * @param {selector} keySelector A function to extract the key for each element.
    * @param {GroupByOptions} [options] Grouping settings.
    */
   groupBy(keySelector, options) {
@@ -190,7 +190,7 @@ module.exports = class Manipula {
 
   /**
    * Method sorts the elements of an iterable in ascending order.
-   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
    */
   orderBy(keySelector, compareFunction) {
@@ -199,7 +199,7 @@ module.exports = class Manipula {
 
   /**
    * Method sorts the elements of an iterable in descending order.
-   * @param {keySelector} keySelector A function to extract a key from an element.
+   * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
    */
   orderByDescending(keySelector, compareFunction) {
@@ -370,7 +370,7 @@ module.exports = class Manipula {
 
   /**
    * Creates a HashMap from an iterable.
-   * @param {keySelector} keySelector A function to extract a key from each element.
+   * @param {selector} keySelector A function to extract a key from each element.
    * @param {ToMapOptions} [options] Convertation settings.
    * @returns {HashMap}
    */
@@ -419,10 +419,19 @@ module.exports = class Manipula {
     return accumulator;
   }
 
+  /**
+   * Method applies an accumulator function over an iterable.
+   * @param {*} accumulatorInitialValue The initial accumulator value.
+   * @param {aggregateFunction} aggregateFunction An accumulator function to be invoked on each element.
+   */
   aggregate(accumulatorInitialValue, aggregateFunction) {
     return this._aggregate(this[Symbol.iterator](), accumulatorInitialValue, aggregateFunction);
   }
 
+  /**
+   * Method invokes a transform function on each element of an iterable and returns the minimum resulting value.
+   * @param {selector} [selector] A transform function to apply to each element.
+   */
   min(selector) {
     const iterator = this[Symbol.iterator]();
     const begin = iterator.next();
@@ -433,6 +442,10 @@ module.exports = class Manipula {
     );
   }
 
+  /**
+   * Method invokes a transform function on each element of an iterable and returns the maximum resulting value.
+   * @param {selector} [selector] A transform function to apply to each element.
+   */
   max(selector) {
     const iterator = this[Symbol.iterator]();
     const begin = iterator.next();
@@ -443,6 +456,10 @@ module.exports = class Manipula {
     );
   }
 
+  /**
+   * Method invokes a transform function on each element of an iterable and returns the sum of the resulting values.
+   * @param {selector} [selector] A transform function to apply to each element.
+   */
   sum(selector) {
     return this._aggregate(
       this[Symbol.iterator](),
@@ -451,6 +468,10 @@ module.exports = class Manipula {
     );
   }
 
+  /**
+   * Method invokes a transform function on each element of an iterable and returns the average of the resulting values.
+   * @param {selector} [selector] A transform function to apply to each element.
+   */
   average(selector) {
     const iterator = this[Symbol.iterator]();
     const begin = iterator.next();
@@ -511,6 +532,12 @@ const GroupByIterator = require("./iterators/groupByIterator");
 const OrderByIterator = require("./iterators/orderByIterator");
 
 /**
+ * @callback selector
+ * @param {*} element The element of the source iterable.
+ * @returns {*} Element transformation result.
+ */
+
+/**
  * @callback selectSelector
  * @param {*} element The element of an iterable.
  * @param {number} elementNumber Number of the iterable element.
@@ -544,20 +571,8 @@ const OrderByIterator = require("./iterators/orderByIterator");
  */
 
 /**
- * @callback keySelector
- * @param {*} element The element of the source iterable.
- * @returns {*} Key for element.
- */
-
-/**
- * @callback elementSelector
- * @param {*} element The element of of the source iterable.
- * @returns {*} Element of a group.
- */
-
-/**
  * @typedef {Object} GroupByOptions
- * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+ * @property {selector} [elementSelector] Method for projecting element of the source iterable to element of a group.
  * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
  */
 
@@ -570,6 +585,14 @@ const OrderByIterator = require("./iterators/orderByIterator");
 
 /**
  * @typedef {Object} ToMapOptions
- * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+ * @property {selector} [elementSelector] Method for projecting element of the source iterable to element of a group.
  * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
+ */
+
+/**
+ * @callback aggregateFunction
+ * @param {*} accumulator Current accumulator value.
+ * @param {*} element The element of an iterable.
+ * @param {number} elementNumber Number of the iterable element.
+ * @returns {*} New accumulator value.
  */
