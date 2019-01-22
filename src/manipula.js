@@ -487,12 +487,19 @@ module.exports = class Manipula {
     return sum / count;
   }
 
+  /**
+   * Method determines whether two iterables are equal according to an equality comparer.
+   * @param {Iterable<any>} second An iterable to compare to the current iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {boolean}
+   */
   sequenceEqual(second, comparer) {
     if (this === second) return true;
     if (!second) return false;
 
     const firstIterator = this[Symbol.iterator]();
     const secondIterator = second[Symbol.iterator]();
+    const equalityComparer = comparer || DefaultEqualityComparer;
     for (
       var firstState = firstIterator.next(), secondState = secondIterator.next();
       firstState.done === false && secondState.done === false;
@@ -500,7 +507,7 @@ module.exports = class Manipula {
     )
       if (
         firstState.value !== secondState.value &&
-        (!comparer || comparer.equals(firstState.value, secondState.value) === false)
+        equalityComparer.equals(firstState.value, secondState.value) === false
       )
         return false;
 

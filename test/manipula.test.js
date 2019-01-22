@@ -1410,6 +1410,25 @@ describe("Should test sequenceEqual", () => {
       second: Manipula.from([new Key(1, 1), new Key(2, 2), new Key(3, 3)]),
       comparer: new KeysComparer(),
       expected: true
+    },
+    {
+      toString: () => "Must determine that sequences are equal using default comparer",
+      first: Manipula.from([new Key(1, 1), new Key(2, 2), new Key(3, 3)]),
+      second: Manipula.from([new Key(1, 1), new Key(2, 2), new Key(3, 3)]),
+      expected: true
+    },
+    {
+      toString: () => "Must determine that sequences are not equal using external comparer",
+      first: Manipula.from([new Key(3, 1), new Key(5, 2), new Key(3, 3)]),
+      second: Manipula.from([new Key(1, 3), new Key(2, 5), new Key(3, 3)]),
+      comparer: new KeysComparer(),
+      expected: false
+    },
+    {
+      toString: () => "Must determine that sequences are not equal using default comparer",
+      first: Manipula.from([new Key(3, 1), new Key(5, 2), new Key(3, 3)]),
+      second: Manipula.from([new Key(1, 3), new Key(2, 5), new Key(3, 3)]),
+      expected: false
     }
   ];
 
