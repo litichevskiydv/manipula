@@ -392,6 +392,10 @@ module.exports = class Manipula {
     return { found: false, element: null };
   }
 
+  /**
+   * Method returns the element at a specified index in an iterable.
+   * @param {number} index The zero-based index of the element to retrieve.
+   */
   elementAt(index) {
     const searchResult = this._tryGetElementByIndex(index);
     if (searchResult.found === false) throw new Error(`Index ${index} lies out of range`);
@@ -399,6 +403,10 @@ module.exports = class Manipula {
     return searchResult.element;
   }
 
+  /**
+   * Method returns the element at a specified index in an iterable or null if the index is out of range.
+   * @param {number} index The zero-based index of the element to retrieve.
+   */
   elementAtOrDefault(index) {
     return this._tryGetElementByIndex(index).element;
   }
