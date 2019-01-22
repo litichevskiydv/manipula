@@ -19,13 +19,6 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback selectSelector
-   * @param {*} element The element of an iterable.
-   * @param {number} elementNumber Number of the iterable element.
-   * @returns {*} Element transformation result.
-   */
-
-  /**
    * Method projects each element of an iterable into new form.
    * @param {selectSelector} selector A transform function to apply to each source element.
    */
@@ -34,26 +27,12 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback selectManySelector
-   * @param {*} element The element of an iterable.
-   * @param {number} elementNumber Number of the iterable element.
-   * @returns {Iterable<any>} Element transformation result.
-   */
-
-  /**
    * Method projects each element of an iterable into new Iterable<any> and flattens the resulting iterables into one iterable.
    * @param {selectManySelector} selector A transform function to apply to each source element.
    */
   selectMany(selector) {
     return new SelectManyIterator(this, selector);
   }
-
-  /**
-   * @callback extendedLogicalPredicate
-   * @param {*} element The element of an iterable.
-   * @param {number} elementNumber Number of the iterable element.
-   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
-   */
 
   /**
    * Method filters an iterable based on a predicate.
@@ -165,12 +144,6 @@ module.exports = class Manipula {
   }
 
   /**
-   * @typedef {Object} EqualityComparer
-   * @property {function(any, any):boolean} equals Method for checking two objects equality.
-   * @property {function(any):number} getHashCode Method for calculating object hashcode.
-   */
-
-  /**
    * Method returns distinct elements from an iterable.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
    */
@@ -206,24 +179,6 @@ module.exports = class Manipula {
   }
 
   /**
-   * @callback keySelector
-   * @param {*} element The element of the source iterable.
-   * @returns {*} Key for element.
-   */
-
-  /**
-   * @callback elementSelector
-   * @param {*} element The element of of the source iterable.
-   * @returns {*} Element of a group.
-   */
-
-  /**
-   * @typedef {Object} GroupByOptions
-   * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
-   * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
-   */
-
-  /**
    * Method groups the elements of an iterable.
    * @param {keySelector} keySelector A function to extract the key for each element.
    * @param {GroupByOptions} [options] Grouping settings.
@@ -232,13 +187,6 @@ module.exports = class Manipula {
     const opt = options || {};
     return new GroupByIterator(this, keySelector, opt.elementSelector, opt.comparer);
   }
-
-  /**
-   * @callback orderingCompareFunction
-   * @param {*} x The first object to compare.
-   * @param {*} y The second object to compare.
-   * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
-   */
 
   /**
    * Method sorts the elements of an iterable in ascending order.
@@ -257,12 +205,6 @@ module.exports = class Manipula {
   orderByDescending(keySelector, compareFunction) {
     return new OrderByIterator(this, keySelector, true, compareFunction);
   }
-
-  /**
-   * @callback logicalPredicate
-   * @param {*} element The element of an iterable.
-   * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
-   */
 
   /**
    * Method returns a number that represents how many elements in an iterable satisfy the condition.
@@ -407,7 +349,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * Creates an array from an iterable
+   * Creates an array from an iterable.
    * @returns {Array<any>}
    */
   toArray() {
@@ -425,12 +367,6 @@ module.exports = class Manipula {
 
     return set;
   }
-
-  /**
-   * @typedef {Object} ToMapOptions
-   * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
-   * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
-   */
 
   /**
    * Creates a HashMap from an iterable.
@@ -565,3 +501,67 @@ const IntersectIterator = require("./iterators/intersectIterator");
 const UnionIterator = require("./iterators/unionIterator");
 const GroupByIterator = require("./iterators/groupByIterator");
 const OrderByIterator = require("./iterators/orderByIterator");
+
+/**
+ * @callback selectSelector
+ * @param {*} element The element of an iterable.
+ * @param {number} elementNumber Number of the iterable element.
+ * @returns {*} Element transformation result.
+ */
+
+/**
+ * @callback selectManySelector
+ * @param {*} element The element of an iterable.
+ * @param {number} elementNumber Number of the iterable element.
+ * @returns {Iterable<any>} Element transformation result.
+ */
+
+/**
+ * @callback logicalPredicate
+ * @param {*} element The element of an iterable.
+ * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
+ */
+
+/**
+ * @callback extendedLogicalPredicate
+ * @param {*} element The element of an iterable.
+ * @param {number} elementNumber Number of the iterable element.
+ * @returns {boolean} true if and element and its number satisfy condition, false otherwise.
+ */
+
+/**
+ * @typedef {Object} EqualityComparer
+ * @property {function(any, any):boolean} equals Method for checking two objects equality.
+ * @property {function(any):number} getHashCode Method for calculating object hashcode.
+ */
+
+/**
+ * @callback keySelector
+ * @param {*} element The element of the source iterable.
+ * @returns {*} Key for element.
+ */
+
+/**
+ * @callback elementSelector
+ * @param {*} element The element of of the source iterable.
+ * @returns {*} Element of a group.
+ */
+
+/**
+ * @typedef {Object} GroupByOptions
+ * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+ * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
+ */
+
+/**
+ * @callback orderingCompareFunction
+ * @param {*} x The first object to compare.
+ * @param {*} y The second object to compare.
+ * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
+ */
+
+/**
+ * @typedef {Object} ToMapOptions
+ * @property {elementSelector} [elementSelector] Method for projecting element of the source iterable to element of a group.
+ * @property {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare keys.
+ */

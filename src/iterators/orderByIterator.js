@@ -18,19 +18,6 @@ module.exports = class OrderByIterator extends Manipula {
   }
 
   /**
-   * @callback keySelector
-   * @param {*} element The element of the source iterable.
-   * @returns {*} Key for element.
-   */
-
-  /**
-   * @callback orderingCompareFunction
-   * @param {*} x The first object to compare.
-   * @param {*} y The second object to compare.
-   * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
-   */
-
-  /**
    * Method performs a subsequent ordering of the elements in an iterable in ascending order.
    * @param {keySelector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
@@ -83,3 +70,16 @@ module.exports = class OrderByIterator extends Manipula {
     for (const element of sourceArray) yield element;
   }
 };
+
+/**
+ * @callback keySelector
+ * @param {*} element The element of the source iterable.
+ * @returns {*} Key for element.
+ */
+
+/**
+ * @callback orderingCompareFunction
+ * @param {*} x The first object to compare.
+ * @param {*} y The second object to compare.
+ * @returns {number} A signed integer that indicates the relative values of x and y, less than zero if x is less than y, greater than zero if x is greater than y and zero if x equals y.
+ */
