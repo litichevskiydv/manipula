@@ -28,10 +28,10 @@ module.exports = class GroupByIterator extends Manipula {
       bucket.push(element);
     }
 
-    for (const pair of map) {
-      let values = Manipula.from(pair[1]);
+    for (const [key, bucket] of map) {
+      let values = Manipula.from(bucket);
       if (this._elementSelector) values = values.select(this._elementSelector);
-      Object.defineProperty(values, "key", { value: pair[0] });
+      Object.defineProperty(values, "key", { value: key });
 
       yield values;
     }
