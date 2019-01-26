@@ -8,11 +8,7 @@ module.exports = class FromIterator extends Manipula {
   constructor(source) {
     super();
     this._source = source;
-
-    if (Manipula._lengthPropertyName in source)
-      Object.defineProperty(this, Manipula._lengthPropertyName, {
-        get: () => this._source[Manipula._lengthPropertyName]
-      });
+    this._tryDefineLengthProperty(this._source);
   }
 
   *[Symbol.iterator]() {

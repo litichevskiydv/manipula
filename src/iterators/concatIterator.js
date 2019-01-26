@@ -9,6 +9,13 @@ module.exports = class ConcatIterator extends Manipula {
     super();
     this._first = first;
     this._second = second;
+
+    const firstLengthPropertyName = Manipula._getLengthPropertyName(this._first);
+    const secondLengthPropertyName = Manipula._getLengthPropertyName(this._second);
+    if (firstLengthPropertyName && secondLengthPropertyName)
+      Object.defineProperty(this, firstLengthPropertyName, {
+        get: () => this._first[firstLengthPropertyName] + this._second[secondLengthPropertyName]
+      });
   }
 
   *[Symbol.iterator]() {

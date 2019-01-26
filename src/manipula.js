@@ -6,8 +6,14 @@ const DefaultEqualityComparer = require("equality-comparison");
  * Class providing LINQ functionality
  */
 module.exports = class Manipula {
-  static get _lengthPropertyName() {
-    return "length";
+  static _getLengthPropertyName(source) {
+    for (const propertyName of ["length", "size"]) if (propertyName in source) return propertyName;
+    return null;
+  }
+
+  _tryDefineLengthProperty(source) {
+    const lengthPropertyName = Manipula._getLengthPropertyName(source);
+    if (lengthPropertyName) Object.defineProperty(this, lengthPropertyName, { get: () => source[lengthPropertyName] });
   }
 
   /**
@@ -212,7 +218,10 @@ module.exports = class Manipula {
    * @returns {number}
    */
   count(predicate) {
-    if (!predicate && Manipula._lengthPropertyName in this) return this[Manipula._lengthPropertyName];
+    if (!predicate) {
+      const lengthPropertyName = Manipula._getLengthPropertyName(this);
+      if (lengthPropertyName) return this[lengthPropertyName];
+    }
 
     let count = 0;
     for (const element of this) if (!predicate || predicate(element)) count++;

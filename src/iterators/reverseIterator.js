@@ -8,6 +8,7 @@ module.exports = class ReverseIterator extends Manipula {
   constructor(source) {
     super();
     this._source = source;
+    this._tryDefineLengthProperty(this._source);
   }
 
   *[Symbol.iterator]() {

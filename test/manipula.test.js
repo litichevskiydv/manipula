@@ -30,7 +30,7 @@ test("Should convert manipula to array", () => {
 
   // Then
   expect(manipula.length).toBe(expectedArray.length);
-  expect(actualArray).toIncludeSameMembers(expectedArray);
+  expect(actualArray).toEqual(expectedArray);
 });
 
 test("Should convert manipula to set of primitive type", () => {
@@ -150,11 +150,10 @@ describe("Should test select", () => {
   test.each(testCases)("%s", testCase => {
     // When
     const actual = testCase.source.select(testCase.selector);
-    const actualArray = actual.toArray();
 
     // Then
     expect(actual.length).toBe(testCase.expected.length);
-    expect(actualArray).toIncludeSameMembers(testCase.expected);
+    expect(actual.toArray()).toEqual(testCase.expected);
   });
 });
 
@@ -180,7 +179,7 @@ describe("Should test selectMany", () => {
 
     // Then
     expect(actual.length).toBe(testCase.expected.length);
-    expect(actual).toIncludeSameMembers(testCase.expected);
+    expect(actual).toEqual(testCase.expected);
   });
 });
 
@@ -205,7 +204,7 @@ describe("Should test where", () => {
     let actual = testCase.source.where(testCase.predicate).toArray();
 
     // Then
-    expect(actual).toIncludeSameMembers(testCase.expected);
+    expect(actual).toEqual(testCase.expected);
   });
 });
 
@@ -214,14 +213,12 @@ test("Should concat collections", () => {
   const manipula = Manipula.from([1, 2]);
 
   // When
-  const actualArray = manipula
-    .concat([3, 4])
-    .concat([5, 6])
-    .toArray();
+  const actual = manipula.concat([3, 4]).concat([5, 6, 7]);
 
   // Then
-  const expectedArray = [1, 2, 3, 4, 5, 6];
-  expect(actualArray).toIncludeSameMembers(expectedArray);
+  const expected = [1, 2, 3, 4, 5, 6, 7];
+  expect(actual.toArray()).toEqual(expected);
+  expect(actual.length).toEqual(expected.length);
 });
 
 describe("Should test union", () => {
@@ -780,10 +777,11 @@ describe("Should test append", () => {
 
   test.each(testCases)("%s", testCase => {
     // When
-    const actual = testCase.source.append(testCase.element).toArray();
+    const actual = testCase.source.append(testCase.element);
 
     // Then
-    expect(actual).toEqual(testCase.expected);
+    expect(actual.toArray()).toEqual(testCase.expected);
+    expect(actual.length).toBe(testCase.expected.length);
   });
 });
 
@@ -805,10 +803,11 @@ describe("Should test prepend", () => {
 
   test.each(testCases)("%s", testCase => {
     // When
-    const actual = testCase.source.prepend(testCase.element).toArray();
+    const actual = testCase.source.prepend(testCase.element);
 
     // Then
-    expect(actual).toEqual(testCase.expected);
+    expect(actual.toArray()).toEqual(testCase.expected);
+    expect(actual.length).toBe(testCase.expected.length);
   });
 });
 
@@ -1181,8 +1180,12 @@ describe("Should test reverse", () => {
   ];
 
   test.each(testCases)("%s", testCase => {
-    // When, Then
-    expect(testCase.source.reverse().toArray()).toEqual(testCase.expected);
+    // When
+    const actual = testCase.source.reverse();
+
+    // Then
+    expect(actual.toArray()).toEqual(testCase.expected);
+    expect(actual.length).toEqual(testCase.expected.length);
   });
 });
 
@@ -1210,9 +1213,12 @@ describe("Should test repeat", () => {
 
   test.each(testCases)("%s", testCase => {
     // When, Then
-    if (testCase.expected)
-      expect(Manipula.repeat(testCase.element, testCase.count).toArray()).toEqual(testCase.expected);
-    else
+    if (testCase.expected) {
+      const actual = Manipula.repeat(testCase.element, testCase.count);
+
+      expect(actual.toArray()).toEqual(testCase.expected);
+      expect(actual.length).toEqual(testCase.expected.length);
+    } else
       expect(() => Manipula.repeat(testCase.element, testCase.count)).toThrowWithMessage(
         Error,
         testCase.expectedErrorMessage
@@ -1244,8 +1250,12 @@ describe("Should test range", () => {
 
   test.each(testCases)("%s", testCase => {
     // When, Then
-    if (testCase.expected) expect(Manipula.range(testCase.start, testCase.count).toArray()).toEqual(testCase.expected);
-    else
+    if (testCase.expected) {
+      const actual = Manipula.range(testCase.start, testCase.count);
+
+      expect(actual.toArray()).toEqual(testCase.expected);
+      expect(actual.length).toEqual(testCase.expected.length);
+    } else
       expect(() => Manipula.range(testCase.start, testCase.count)).toThrowWithMessage(
         Error,
         testCase.expectedErrorMessage
@@ -1388,10 +1398,11 @@ describe("Should test ordering", () => {
 
   test.each(testCases)("%s", testCase => {
     // When
-    const actual = testCase.sorter(testCase.source).toArray();
+    const actual = testCase.sorter(testCase.source);
 
     // Then
-    expect(actual).toEqual(testCase.expected);
+    expect(actual.toArray()).toEqual(testCase.expected);
+    expect(actual.length).toEqual(testCase.expected.length);
   });
 });
 

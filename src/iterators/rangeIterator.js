@@ -9,6 +9,7 @@ module.exports = class RangeIterator extends Manipula {
     super();
     this._start = start;
     this._count = count;
+    this.length = this._count;
   }
 
   *[Symbol.iterator]() {

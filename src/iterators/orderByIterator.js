@@ -15,6 +15,7 @@ module.exports = class OrderByIterator extends Manipula {
         compareFunction: compareFunction
       }
     ];
+    this._tryDefineLengthProperty(this._source);
   }
 
   /**

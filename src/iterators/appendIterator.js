@@ -9,6 +9,10 @@ module.exports = class AppendIterator extends Manipula {
     super();
     this._source = source;
     this._element = element;
+
+    const lengthPropertyName = Manipula._getLengthPropertyName(this._source);
+    if (lengthPropertyName)
+      Object.defineProperty(this, lengthPropertyName, { get: () => this._source[lengthPropertyName] + 1 });
   }
 
   *[Symbol.iterator]() {

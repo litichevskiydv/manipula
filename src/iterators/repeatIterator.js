@@ -9,6 +9,7 @@ module.exports = class RepeatIterator extends Manipula {
     super();
     this._element = element;
     this._count = count;
+    this.length = this._count;
   }
 
   *[Symbol.iterator]() {
