@@ -87,6 +87,18 @@ test("Should convert manipula to map of primitive type", () => {
   expect(sourceArray).toSatisfyAll(x => actualMap.get(x) === x * x);
 });
 
+test("Should convert manipula to map of primitive type passing elements selector as a second parameter", () => {
+  // Given
+  const sourceArray = [1, 2, 3, 4, 5];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualMap = manipula.toMap(x => x, x => x * x);
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualMap.get(x) === x * x);
+});
+
 test("Should convert manipula to map of complex type using external comparer", () => {
   // Given
   const sourceArray = [1, 2];

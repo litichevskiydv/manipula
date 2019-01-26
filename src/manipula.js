@@ -371,11 +371,11 @@ module.exports = class Manipula {
   /**
    * Creates a HashMap from an iterable.
    * @param {selector} keySelector A function to extract a key from each element.
-   * @param {ToMapOptions} [options] Convertation settings.
+   * @param {ToMapOptions | selector} [options] Convertation settings or HashMap values selector.
    * @returns {HashMap}
    */
   toMap(keySelector, options) {
-    const opt = options || {};
+    const opt = typeof options === "function" ? { elementSelector: options } : options || {};
     const map = new HashMap(opt.comparer || DefaultEqualityComparer);
     for (const element of this)
       map.set(keySelector(element), !opt.elementSelector ? element : opt.elementSelector(element));
