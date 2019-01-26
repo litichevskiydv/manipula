@@ -724,6 +724,17 @@ describe("Should test groupBy", () => {
       },
       options: { elementSelector: x => x.value },
       expected: [[2, 3], [4]]
+    },
+    {
+      toString: () => "Should group elements passing new elements selector as second parameter",
+      source: Manipula.from([
+        { key: new Key(1, 1), value: 2 },
+        { key: new Key(1, 1), value: 3 },
+        { key: new Key(2, 2), value: 4 }
+      ]),
+      keySelector: x => x.key,
+      options: x => x.value + 1,
+      expected: [[3, 4], [5]]
     }
   ];
 

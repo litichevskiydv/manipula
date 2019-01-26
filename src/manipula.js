@@ -181,10 +181,10 @@ module.exports = class Manipula {
   /**
    * Method groups the elements of an iterable.
    * @param {selector} keySelector A function to extract the key for each element.
-   * @param {GroupByOptions} [options] Grouping settings.
+   * @param {GroupByOptions | selector} [options] Grouping settings or groups elements selector.
    */
   groupBy(keySelector, options) {
-    const opt = options || {};
+    const opt = typeof options === "function" ? { elementSelector: options } : options || {};
     return new GroupByIterator(this, keySelector, opt.elementSelector, opt.comparer);
   }
 
