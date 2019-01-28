@@ -19,6 +19,7 @@ module.exports = class Manipula {
   /**
    * Method wraps iterable for extending its functionality.
    * @param {Iterable<any>} source Iterable for wrapping.
+   * @returns {FromIterator}
    */
   static from(source) {
     return new FromIterator(source);
@@ -27,6 +28,7 @@ module.exports = class Manipula {
   /**
    * Method projects each element of an iterable into new form.
    * @param {selectSelector} selector A transform function to apply to each source element.
+   * @returns {SelectIterator}
    */
   select(selector) {
     return new SelectIterator(this, selector);
@@ -35,6 +37,7 @@ module.exports = class Manipula {
   /**
    * Method projects each element of an iterable into new Iterable<any> and flattens the resulting iterables into one iterable.
    * @param {selectManySelector} selector A transform function to apply to each source element.
+   * @returns {SelectManyIterator}
    */
   selectMany(selector) {
     return new SelectManyIterator(this, selector);
@@ -43,6 +46,7 @@ module.exports = class Manipula {
   /**
    * Method filters an iterable based on a predicate.
    * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @returns {WhereIterator}
    */
   where(predicate) {
     return new WhereIterator(this, predicate);
@@ -51,6 +55,7 @@ module.exports = class Manipula {
   /**
    * Methods adds given iterable to current.
    * @param {Iterable<any>} second The iterable to concatenate to the current.
+   * @returns {ConcatIterator}
    */
   concat(second) {
     return new ConcatIterator(this, second);
@@ -59,6 +64,7 @@ module.exports = class Manipula {
   /**
    * Method appends a value to the end of the current iterable.
    * @param {*} element The value to append to current iterable.
+   * @returns {AppendIterator}
    */
   append(element) {
     return new AppendIterator(this, element);
@@ -67,6 +73,7 @@ module.exports = class Manipula {
   /**
    * Method adds a value to the beginning of the current iterable.
    * @param {*} element The value to prepend to current iterable.
+   * @returns {PrependIterator}
    */
   prepend(element) {
     return new PrependIterator(this, element);
@@ -75,6 +82,7 @@ module.exports = class Manipula {
   /**
    * Method bypasses a specified number of elements in a iterable and then returns the remaining elements.
    * @param {number} count The number of elements to skip before returning the remaining elements.
+   * @returns {SkipIterator}
    */
   skip(count) {
     return new SkipIterator(this, count);
@@ -83,6 +91,7 @@ module.exports = class Manipula {
   /**
    * Method returns a specified number of contiguous elements from the start of a iterable.
    * @param {number} count The number of elements to return.
+   * @returns {TakeIterator}
    */
   take(count) {
     return new TakeIterator(this, count);
@@ -91,6 +100,7 @@ module.exports = class Manipula {
   /**
    * Method bypasses elements in an iterable as long as a specified condition is true and then returns the remaining elements.
    * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @returns {SkipWhileIterator}
    */
   skipWhile(predicate) {
     return new SkipWhileIterator(this, predicate);
@@ -99,6 +109,7 @@ module.exports = class Manipula {
   /**
    * Method returns elements from an iterable as long as a specified condition is true, and then skips the remaining elements.
    * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
+   * @returns {TakeWhileIterator}
    */
   takeWhile(predicate) {
     return new TakeWhileIterator(this, predicate);
@@ -107,6 +118,7 @@ module.exports = class Manipula {
   /**
    * Method returns all but a specified number of contiguous elements from the end of an iterable.
    * @param {number} count The number of elements to skip from the end of an iterable.
+   * @returns {SkipLastIterator}
    */
   skipLast(count) {
     return new SkipLastIterator(this, count);
@@ -115,6 +127,7 @@ module.exports = class Manipula {
   /**
    * Method returns a specified number of contiguous elements from the end of an iterable.
    * @param {number} count The number of elements to return.
+   * @returns {TakeLastIterator}
    */
   takeLast(count) {
     return new TakeLastIterator(this, count);
@@ -124,6 +137,7 @@ module.exports = class Manipula {
    * Method generates an iterable of integral numbers within a specified range.
    * @param {number} start The value of the first integer in the iterable.
    * @param {number} count The number of sequential integers to generate.
+   * @returns {RangeIterator}
    */
   static range(start, count) {
     if (count < 0) throw new Error("Count mustn't be negative");
@@ -135,6 +149,7 @@ module.exports = class Manipula {
    * Method generates an iterable that contains one repeated value.
    * @param {*} element The value to be repeated.
    * @param {number} count The number of times to repeat the value in the generated iterable.
+   * @returns {RepeatIterator}
    */
   static repeat(element, count) {
     if (count < 0) throw new Error("Count mustn't be negative");
@@ -144,6 +159,7 @@ module.exports = class Manipula {
 
   /**
    * Method inverts the order of the elements in an iterable.
+   * @returns {ReverseIterator}
    */
   reverse() {
     return new ReverseIterator(this);
@@ -152,6 +168,7 @@ module.exports = class Manipula {
   /**
    * Method returns distinct elements from an iterable.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {DistinctIterator}
    */
   distinct(comparer) {
     return new DistinctIterator(this, comparer);
@@ -161,6 +178,7 @@ module.exports = class Manipula {
    * Method returns differences between current and given iterables.
    * @param {Iterable<any>} second An iterable whose elements that also occur in the first iterable will cause those elements to be removed from the returned iterable.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {ExceptIterator}
    */
   except(second, comparer) {
     return new ExceptIterator(this, second, comparer);
@@ -170,6 +188,7 @@ module.exports = class Manipula {
    * Method returns intersection between the current and given iterables.
    * @param {Iterable<any>} second An iterable whose distinct elements that also appear in the current iterable will be returned.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {IntersectIterator}
    */
   intersect(second, comparer) {
     return new IntersectIterator(this, second, comparer);
@@ -179,6 +198,7 @@ module.exports = class Manipula {
    * Method returns union of the current and given iterables.
    * @param {Iterable<any>} second An iterable whose distinct elements form the second set for the union.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {UnionIterator}
    */
   union(second, comparer) {
     return new UnionIterator(this, second, comparer);
@@ -188,6 +208,7 @@ module.exports = class Manipula {
    * Method groups the elements of an iterable.
    * @param {selector} keySelector A function to extract the key for each element.
    * @param {GroupByOptions | selector} [options] Grouping settings or groups elements selector.
+   * @returns {GroupByIterator}
    */
   groupBy(keySelector, options) {
     const opt = typeof options === "function" ? { elementSelector: options } : options || {};
@@ -198,6 +219,7 @@ module.exports = class Manipula {
    * Method sorts the elements of an iterable in ascending order.
    * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   * @returns {OrderByIterator}
    */
   orderBy(keySelector, compareFunction) {
     return new OrderByIterator(this, keySelector, false, compareFunction);
@@ -207,6 +229,7 @@ module.exports = class Manipula {
    * Method sorts the elements of an iterable in descending order.
    * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   * @returns {OrderByIterator}
    */
   orderByDescending(keySelector, compareFunction) {
     return new OrderByIterator(this, keySelector, true, compareFunction);

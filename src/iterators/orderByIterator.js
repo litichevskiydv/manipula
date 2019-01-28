@@ -22,6 +22,7 @@ module.exports = class OrderByIterator extends Manipula {
    * Method performs a subsequent ordering of the elements in an iterable in ascending order.
    * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   * @returns {OrderByIterator}
    */
   thenBy(keySelector, compareFunction) {
     this._comparers.push({
@@ -36,6 +37,7 @@ module.exports = class OrderByIterator extends Manipula {
    * Method performs a subsequent ordering of the elements in a sequence in descending order.
    * @param {selector} keySelector A function to extract a key from an element.
    * @param {orderingCompareFunction} [compareFunction] A function to compare keys.
+   * @returns {OrderByIterator}
    */
   thenByDescending(keySelector, compareFunction) {
     this._comparers.push({
