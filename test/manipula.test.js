@@ -999,7 +999,10 @@ describe("Should test elementAt", () => {
     // When, Then
     if (testCase.expected) expect(testCase.source.elementAt(testCase.index)).toBe(testCase.expected);
     else
-      expect(() => testCase.source.elementAt(testCase.index)).toThrowWithMessage(Error, testCase.expectedErrorMessage);
+      expect(() => testCase.source.elementAt(testCase.index)).toThrowWithMessage(
+        RangeError,
+        testCase.expectedErrorMessage
+      );
   });
 });
 
@@ -1220,7 +1223,7 @@ describe("Should test repeat", () => {
       expect(actual.length).toEqual(testCase.expected.length);
     } else
       expect(() => Manipula.repeat(testCase.element, testCase.count)).toThrowWithMessage(
-        Error,
+        RangeError,
         testCase.expectedErrorMessage
       );
   });
@@ -1257,7 +1260,7 @@ describe("Should test range", () => {
       expect(actual.length).toEqual(testCase.expected.length);
     } else
       expect(() => Manipula.range(testCase.start, testCase.count)).toThrowWithMessage(
-        Error,
+        RangeError,
         testCase.expectedErrorMessage
       );
   });

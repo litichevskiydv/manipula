@@ -140,7 +140,7 @@ module.exports = class Manipula {
    * @returns {RangeIterator}
    */
   static range(start, count) {
-    if (count < 0) throw new Error("Count mustn't be negative");
+    if (count < 0) throw new RangeError("Count mustn't be negative");
 
     return new RangeIterator(start, count);
   }
@@ -152,7 +152,7 @@ module.exports = class Manipula {
    * @returns {RepeatIterator}
    */
   static repeat(element, count) {
-    if (count < 0) throw new Error("Count mustn't be negative");
+    if (count < 0) throw new RangeError("Count mustn't be negative");
 
     return new RepeatIterator(element, count);
   }
@@ -430,7 +430,7 @@ module.exports = class Manipula {
    */
   elementAt(index) {
     const searchResult = this._tryGetElementByIndex(index);
-    if (searchResult.found === false) throw new Error(`Index ${index} lies out of range`);
+    if (searchResult.found === false) throw new RangeError(`Index ${index} lies out of range`);
 
     return searchResult.element;
   }
