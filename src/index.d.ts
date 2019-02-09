@@ -1,4 +1,4 @@
-export interface IEnumerable<T> {
+export interface IEnumerable<T> extends Iterable<T> {
   aggregate(initialValue: T, aggregateFunction: (accumulator: T, element: T, index: number) => T): T;
   aggregate<TResult>(
     initialValue: TResult,
@@ -22,12 +22,12 @@ export interface IEnumerable<T> {
   count(): number;
   count(predicate: (element: T) => boolean): number;
 
-  distinct(): number;
-  distinct(equalityComparer: IEqualityComparer<T>): number;
+  distinct(): IEnumerable<T>;
+  distinct(equalityComparer: IEqualityComparer<T>): IEnumerable<T>;
 
   elementAt(index: number): T;
 
-  elementAtOrDefault(index: number): T | null;
+  elementAtOrDefault(index: number): T;
 
   except(second: Iterable<T>): IEnumerable<T>;
   except(second: Iterable<T>, equalityComparer: IEqualityComparer<T>): IEnumerable<T>;
@@ -86,8 +86,8 @@ export interface IEnumerable<T> {
   single(): T;
   single(predicate: (element: T) => boolean): T;
 
-  singleOrDefault(): Nullable<T>;
-  singleOrDefault(predicate: (element: T) => boolean): Nullable<T>;
+  singleOrDefault(): T;
+  singleOrDefault(predicate: (element: T) => boolean): T;
 
   skip(count: number): IEnumerable<T>;
 
@@ -137,7 +137,6 @@ interface IGrouping<TKey, TElement> extends IEnumerable<TElement> {
 }
 
 interface IOrderedEnumerable<T> extends IEnumerable<T> {
-  createOrderedEnumerable<TKey>(keySelector: (element: T) => TKey, descending: boolean): IOrderedEnumerable<T>;
   thenBy<TKey>(keySelector: (element: T) => TKey): IOrderedEnumerable<T>;
   thenBy<TKey>(keySelector: (element: T) => TKey, comparer: (x: TKey, y: TKey) => number): IOrderedEnumerable<T>;
   thenByDescending<TKey>(keySelector: (element: T) => TKey): IOrderedEnumerable<T>;
@@ -155,9 +154,9 @@ declare namespace Collections {
     has(key: TKey): boolean;
     delete(key: TKey): boolean;
     clear(): void;
-    entries(): Iterable<[TKey, TValue]>;
-    keys(): Iterable<TKey>;
-    values(): Iterable<TValue>;
+    entries(): IterableIterator<[TKey, TValue]>;
+    keys(): IterableIterator<TKey>;
+    values(): IterableIterator<TValue>;
   }
 
   export interface ISet<T> extends Iterable<T> {
@@ -166,8 +165,8 @@ declare namespace Collections {
     has(value: T): boolean;
     delete(value: T): boolean;
     clear(): void;
-    entries(): Iterable<[T, T]>;
-    values(): Iterable<T>;
+    entries(): IterableIterator<[T, T]>;
+    values(): IterableIterator<T>;
   }
 }
 
