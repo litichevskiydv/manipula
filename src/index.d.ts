@@ -7,6 +7,7 @@ export interface IEnumerable<T> extends Iterable<T> {
 
   all(predicate: (element: T) => boolean): boolean;
 
+  any(): boolean;
   any(predicate: (element: T) => boolean): boolean;
 
   append(element: T): IEnumerable<T>;
