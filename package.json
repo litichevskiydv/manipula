@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Implementation of LINQ",
   "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "files": [
     "src",
     "README.md",
