@@ -79,7 +79,7 @@ export interface IEnumerable<T> extends Iterable<T> {
 
   select<TResult>(selector: (element: T, index: number) => TResult): IEnumerable<TResult>;
 
-  selectMany<TResult>(selector: (element: T, index: number) => IEnumerable<TResult>): IEnumerable<TResult>;
+  selectMany<TResult>(selector: (element: T, index: number) => Iterable<TResult>): IEnumerable<TResult>;
 
   sequenceEqual(second: Iterable<T>): boolean;
   sequenceEqual(second: Iterable<T>, comparer: IEqualityComparer<T>): boolean;
