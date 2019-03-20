@@ -175,6 +175,17 @@ module.exports = class Manipula {
   }
 
   /**
+   * Method returns distinct elements from an iterable,
+   * where "distinctness" is determined via a projection and the specified comparer.
+   * @param {selector} keySelector A function to extract the key for each element.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {DistinctIterator}
+   */
+  distinctBy(keySelector, comparer) {
+    return new DistinctByIterator(this, keySelector, comparer);
+  }
+
+  /**
    * Method returns differences between current and given iterables.
    * @param {Iterable<any>} second An iterable whose elements that also occur in the first iterable will cause those elements to be removed from the returned iterable.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
@@ -564,6 +575,7 @@ const RangeIterator = require("./iterators/rangeIterator");
 const RepeatIterator = require("./iterators/repeatIterator");
 const ReverseIterator = require("./iterators/reverseIterator");
 const DistinctIterator = require("./iterators/distinctIterator");
+const DistinctByIterator = require("./iterators/distinctIByterator");
 const ExceptIterator = require("./iterators/exceptIterator");
 const IntersectIterator = require("./iterators/intersectIterator");
 const UnionIterator = require("./iterators/unionIterator");

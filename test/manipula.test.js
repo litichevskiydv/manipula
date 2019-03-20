@@ -307,7 +307,6 @@ describe("Should test distinct", () => {
     {
       toString: () => "Distincting collections of complex type using default comparer",
       source: Manipula.from([{ hi: 1, lo: 1 }, { hi: 2, lo: 2 }, { hi: 2, lo: 2 }, { hi: 1, lo: 1 }]),
-      comparer: new KeysComparer(),
       expected: [{ hi: 1, lo: 1 }, { hi: 2, lo: 2 }]
     }
   ];
@@ -315,6 +314,48 @@ describe("Should test distinct", () => {
   test.each(testCases)("%s", testCase => {
     // When
     const actual = testCase.source.distinct(testCase.comparer).toArray();
+
+    // Then
+    expect(actual).toEqual(testCase.expected);
+  });
+});
+
+describe("Should test distinctBy", () => {
+  const testCases = [
+    {
+      toString: () => "Distincting collections by primitive key",
+      source: Manipula.from([{ key: 1, value: 1 }, { key: 1, value: 2 }, { key: 2, value: 2 }]),
+      ketSelector: x => x.key,
+      expected: [{ key: 1, value: 1 }, { key: 2, value: 2 }]
+    },
+    {
+      toString: () => "Distincting collections by complex key using external comparer",
+      source: Manipula.from([
+        { key: new Key(1, 1), value: 1 },
+        { key: new Key(2, 2), value: 2 },
+        { key: new Key(2, 2), value: 3 },
+        { key: new Key(1, 1), value: 4 }
+      ]),
+      ketSelector: x => x.key,
+      comparer: new KeysComparer(),
+      expected: [{ key: new Key(1, 1), value: 1 }, { key: new Key(2, 2), value: 2 }]
+    },
+    {
+      toString: () => "Distincting collections by complex key using default comparer",
+      source: Manipula.from([
+        { key: { hi: 1, lo: 1 }, value: 1 },
+        { key: { hi: 2, lo: 2 }, value: 2 },
+        { key: { hi: 2, lo: 2 }, value: 3 },
+        { key: { hi: 1, lo: 1 }, value: 4 }
+      ]),
+      ketSelector: x => x.key,
+      expected: [{ key: { hi: 1, lo: 1 }, value: 1 }, { key: { hi: 2, lo: 2 }, value: 2 }]
+    }
+  ];
+
+  test.each(testCases)("%s", testCase => {
+    // When
+    const actual = testCase.source.distinctBy(testCase.ketSelector, testCase.comparer).toArray();
 
     // Then
     expect(actual).toEqual(testCase.expected);

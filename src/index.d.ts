@@ -26,6 +26,9 @@ export interface IEnumerable<T> extends Iterable<T> {
   distinct(): IEnumerable<T>;
   distinct(equalityComparer: IEqualityComparer<T>): IEnumerable<T>;
 
+  distinctBy<TKey>(keySelector: (element: T) => TKey): IEnumerable<T>;
+  distinctBy<TKey>(keySelector: (element: T) => TKey, equalityComparer: IEqualityComparer<T>): IEnumerable<T>;
+
   elementAt(index: number): T;
 
   elementAtOrDefault(index: number): T;
