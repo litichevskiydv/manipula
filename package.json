@@ -1,6 +1,6 @@
 {
   "name": "manipula",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Implementation of LINQ",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
