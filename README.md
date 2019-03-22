@@ -20,6 +20,7 @@ Implementation of LINQ
     - [.contains(value, [comparer])](https://github.com/litichevskiydv/manipula/wiki/contains) : <code>boolean</code>
     - [.count([predicate])](https://github.com/litichevskiydv/manipula/wiki/count) : <code>number</code>
     - [.distinct([comparer])](https://github.com/litichevskiydv/manipula/wiki/distinct)
+    - [.distinctBy(keySelector, [comparer])](https://github.com/litichevskiydv/manipula/wiki/distinctBy)
     - [.elementAt(index)](https://github.com/litichevskiydv/manipula/wiki/elementAt)
     - [.elementAtOrDefault(index)](https://github.com/litichevskiydv/manipula/wiki/elementAtOrDefault)
     - [.except(second, [comparer])](https://github.com/litichevskiydv/manipula/wiki/except)
