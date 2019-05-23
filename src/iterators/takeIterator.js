@@ -10,14 +10,12 @@ module.exports = class TakeIterator extends Manipula {
     this._source = source;
     this._count = count;
   }
-  
+
   *[Symbol.iterator]() {
-    const iterator = this._source[Symbol.iterator]();
-    for (
-      let currentState = iterator.next(), i = 0; 
-      !currentState.done && i < this._count;
-      currentState = iterator.next(), i++
-    )
-      yield currentState.value;
+    let i = 0;
+    for (const element of this._source) {
+      if (i++ >= this._count) break;
+      yield element;
+    }
   }
 };
