@@ -1,5 +1,6 @@
 const HashSet = require("collectio-hashset");
 const HashMap = require("collectio-hashmap");
+const { forEachAsync } = require("partitioned-loops");
 const DefaultEqualityComparer = require("equality-comparison");
 
 /**
@@ -397,6 +398,14 @@ module.exports = class Manipula {
    */
   toArray() {
     return Array.from(this);
+  }
+
+  /**
+   * Creates an array from an iterable asynchronously.
+   * @returns {Promise<Array<any>>}
+   */
+  async toArrayAsync() {
+    return (await forEachAsync(this, (x, state) => state.array.push(x), { array: [] })).array;
   }
 
   /**

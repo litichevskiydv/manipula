@@ -353,6 +353,11 @@ export interface IEnumerable<T> extends Iterable<T> {
   toArray(): Array<T>;
 
   /**
+   * Creates an array from an iterable asynchronously.
+   */
+  toArrayAsync(): Promise<Array<T>>;
+
+  /**
    * Creates a HashMap from an iterable.
    * @param keySelector A function to extract a key from each element.
    */

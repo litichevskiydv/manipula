@@ -33,6 +33,18 @@ test("Should convert manipula to array", () => {
   expect(actualArray).toEqual(expectedArray);
 });
 
+test("Should convert manipula to array asynchronously", async () => {
+  // Given
+  const manipula = Manipula.from([1, 2, 3, 4, 5]).where(x => x % 2 === 0);
+
+  // When
+  const actualArray = await manipula.toArrayAsync();
+
+  // Then
+  const expectedArray = [2, 4];
+  expect(actualArray).toEqual(expectedArray);
+});
+
 test("Should convert manipula to set of primitive type", () => {
   // Given
   const sourceArray = [1, 2, 3, 4, 5];
