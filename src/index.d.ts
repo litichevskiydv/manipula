@@ -388,11 +388,23 @@ export interface IEnumerable<T> extends Iterable<T> {
    * Creates a HashSet from an iterable.
    */
   toSet(): Collections.ISet<T>;
+
+  /**
+   * Creates a HashSet from an iterable asynchronously.
+   */
+  toSetAsync(): Promise<Collections.ISet<T>>;
+
   /**
    * Creates a HashSet from an iterable.
    * @param comparer An EqualityComparer to compare elements.
    */
   toSet(comparer: IEqualityComparer<T>): Collections.ISet<T>;
+
+  /**
+   * Creates a HashSet from an iterable asynchronously.
+   * @param comparer An EqualityComparer to compare elements.
+   */
+  toSetAsync(comparer: IEqualityComparer<T>): Promise<Collections.ISet<T>>;
 
   /**
    * Method returns union of the current and given iterables.

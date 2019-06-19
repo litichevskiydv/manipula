@@ -421,6 +421,17 @@ module.exports = class Manipula {
   }
 
   /**
+   * Creates a HashSet from an iterable.
+   * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
+   * @returns {Promise<HashSet>}
+   */
+  async toSetAsync(comparer) {
+    return (await forEachAsync(this, (x, state) => state.set.add(x), {
+      set: new HashSet(comparer || DefaultEqualityComparer)
+    })).set;
+  }
+
+  /**
    * Creates a HashMap from an iterable.
    * @param {selector} keySelector A function to extract a key from each element.
    * @param {ToMapOptions | selector} [options] Convertation settings or HashMap values selector.

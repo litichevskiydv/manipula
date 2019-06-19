@@ -57,6 +57,18 @@ test("Should convert manipula to set of primitive type", () => {
   expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
 });
 
+test("Should convert manipula to set of primitive type asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2, 3, 4, 5];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualSet = await manipula.toSetAsync();
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
+});
+
 test("Should convert manipula to set of complex type using external comparer", () => {
   // Given
   const firstKey = new Key(1, 1);
@@ -72,6 +84,21 @@ test("Should convert manipula to set of complex type using external comparer", (
   expect(actualSet.has(new Key(firstKey.hi, firstKey.lo))).toBeTrue();
 });
 
+test("Should convert manipula to set of complex type using external comparer asynchronously", async () => {
+  // Given
+  const firstKey = new Key(1, 1);
+  const secondKey = new Key(2, 2);
+  const sourceArray = [firstKey, secondKey];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualSet = await manipula.toSetAsync(new KeysComparer());
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
+  expect(actualSet.has(new Key(firstKey.hi, firstKey.lo))).toBeTrue();
+});
+
 test("Should convert manipula to set of complex type using default comparer", () => {
   // Given
   const firstKey = { hi: 1, lo: 1 };
@@ -81,6 +108,21 @@ test("Should convert manipula to set of complex type using default comparer", ()
 
   // When
   const actualSet = manipula.toSet();
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
+  expect(actualSet.has({ hi: firstKey.hi, lo: firstKey.lo })).toBeTrue();
+});
+
+test("Should convert manipula to set of complex type using default comparer asynchronously", async () => {
+  // Given
+  const firstKey = { hi: 1, lo: 1 };
+  const secondKey = { hi: 2, lo: 2 };
+  const sourceArray = [firstKey, secondKey];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualSet = await manipula.toSetAsync();
 
   // Then
   expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
