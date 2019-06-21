@@ -51,8 +51,11 @@ Implementation of LINQ
     - [.thenBy(keySelector, [compareFunction])](https://github.com/litichevskiydv/manipula/wiki/thenBy)
     - [.thenByDescending(keySelector, [compareFunction])](https://github.com/litichevskiydv/manipula/wiki/thenByDescending)
     - [.toArray()](https://github.com/litichevskiydv/manipula/wiki/toArray) : <code>Array&lt;any&gt;</code>
+    - [.toArrayAsync()](https://github.com/litichevskiydv/manipula/wiki/toArrayAsync) : <code>Promise&lt;Array&lt;any&gt;&gt;</code>
     - [.toMap(keySelector, [options])](https://github.com/litichevskiydv/manipula/wiki/toMap) : <code>HashMap</code>
+    - [.toMapAsync(keySelector, [options])](https://github.com/litichevskiydv/manipula/wiki/toMapAsync) : <code>Promise&lt;HashMap&gt;</code>
     - [.toSet([comparer])](https://github.com/litichevskiydv/manipula/wiki/toSet) : <code>HashSet</code>
+    - [.toSetAsync([comparer])](https://github.com/litichevskiydv/manipula/wiki/toSetAsync) : <code>Promise&lt;HashSet&gt;</code>
     - [.union(second, [comparer])](https://github.com/litichevskiydv/manipula/wiki/union)
     - [.where(predicate)](https://github.com/litichevskiydv/manipula/wiki/where)
   - _static_
