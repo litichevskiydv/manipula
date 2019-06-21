@@ -351,7 +351,6 @@ export interface IEnumerable<T> extends Iterable<T> {
    * Creates an array from an iterable.
    */
   toArray(): Array<T>;
-
   /**
    * Creates an array from an iterable asynchronously.
    */
@@ -385,21 +384,46 @@ export interface IEnumerable<T> extends Iterable<T> {
   ): Collections.IMap<TKey, TValue>;
 
   /**
+   * Creates a HashMap from an iterable asynchronously.
+   * @param keySelector A function to extract a key from each element.
+   */
+  toMapAsync<TKey>(keySelector: (element: T) => TKey): Promise<Collections.IMap<TKey, T>>;
+  /**
+   * Creates a HashMap from an iterable asynchronously.
+   * @param keySelector A function to extract a key from each element.
+   * @param elementSelector HashMap values selector.
+   */
+  toMapAsync<TKey, TValue>(
+    keySelector: (element: T) => TKey,
+    elementSelector: (element: T) => TValue
+  ): Promise<Collections.IMap<TKey, TValue>>;
+  /**
+   * Creates a HashMap from an iterable asynchronously.
+   * @param keySelector A function to extract a key from each element.
+   * @param options Convertation settings.
+   */
+  toMapAsync<TKey, TValue>(
+    keySelector: (element: T) => TKey,
+    options: {
+      elementSelector: (element: T) => TValue;
+      comparer?: IEqualityComparer<TKey>;
+    }
+  ): Promise<Collections.IMap<TKey, TValue>>;
+
+  /**
    * Creates a HashSet from an iterable.
    */
   toSet(): Collections.ISet<T>;
-
-  /**
-   * Creates a HashSet from an iterable asynchronously.
-   */
-  toSetAsync(): Promise<Collections.ISet<T>>;
-
   /**
    * Creates a HashSet from an iterable.
    * @param comparer An EqualityComparer to compare elements.
    */
   toSet(comparer: IEqualityComparer<T>): Collections.ISet<T>;
 
+  /**
+   * Creates a HashSet from an iterable asynchronously.
+   */
+  toSetAsync(): Promise<Collections.ISet<T>>;
   /**
    * Creates a HashSet from an iterable asynchronously.
    * @param comparer An EqualityComparer to compare elements.

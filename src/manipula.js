@@ -421,7 +421,7 @@ module.exports = class Manipula {
   }
 
   /**
-   * Creates a HashSet from an iterable.
+   * Creates a HashSet from an iterable asynchronously.
    * @param {EqualityComparer} [comparer = DefaultEqualityComparer] An EqualityComparer to compare elements.
    * @returns {Promise<HashSet>}
    */
@@ -444,6 +444,23 @@ module.exports = class Manipula {
       map.set(keySelector(element), !opt.elementSelector ? element : opt.elementSelector(element));
 
     return map;
+  }
+
+  /**
+   * Creates a HashMap from an iterable asynchronously.
+   * @param {selector} keySelector A function to extract a key from each element.
+   * @param {ToMapOptions | selector} [options] Convertation settings or HashMap values selector.
+   * @returns {Promise<HashMap>}
+   */
+  async toMapAsync(keySelector, options) {
+    const opt = typeof options === "function" ? { elementSelector: options } : options || {};
+    return (await forEachAsync(
+      this,
+      (x, state) => state.map.set(keySelector(x), !opt.elementSelector ? x : opt.elementSelector(x)),
+      {
+        map: new HashMap(opt.comparer || DefaultEqualityComparer)
+      }
+    )).map;
   }
 
   _tryGetElementByIndex(index) {

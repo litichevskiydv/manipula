@@ -57,18 +57,6 @@ test("Should convert manipula to set of primitive type", () => {
   expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
 });
 
-test("Should convert manipula to set of primitive type asynchronously", async () => {
-  // Given
-  const sourceArray = [1, 2, 3, 4, 5];
-  const manipula = Manipula.from(sourceArray);
-
-  // When
-  const actualSet = await manipula.toSetAsync();
-
-  // Then
-  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
-});
-
 test("Should convert manipula to set of complex type using external comparer", () => {
   // Given
   const firstKey = new Key(1, 1);
@@ -78,21 +66,6 @@ test("Should convert manipula to set of complex type using external comparer", (
 
   // When
   const actualSet = manipula.toSet(new KeysComparer());
-
-  // Then
-  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
-  expect(actualSet.has(new Key(firstKey.hi, firstKey.lo))).toBeTrue();
-});
-
-test("Should convert manipula to set of complex type using external comparer asynchronously", async () => {
-  // Given
-  const firstKey = new Key(1, 1);
-  const secondKey = new Key(2, 2);
-  const sourceArray = [firstKey, secondKey];
-  const manipula = Manipula.from(sourceArray);
-
-  // When
-  const actualSet = await manipula.toSetAsync(new KeysComparer());
 
   // Then
   expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
@@ -112,6 +85,33 @@ test("Should convert manipula to set of complex type using default comparer", ()
   // Then
   expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
   expect(actualSet.has({ hi: firstKey.hi, lo: firstKey.lo })).toBeTrue();
+});
+
+test("Should convert manipula to set of primitive type asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2, 3, 4, 5];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualSet = await manipula.toSetAsync();
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
+});
+
+test("Should convert manipula to set of complex type using external comparer asynchronously", async () => {
+  // Given
+  const firstKey = new Key(1, 1);
+  const secondKey = new Key(2, 2);
+  const sourceArray = [firstKey, secondKey];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualSet = await manipula.toSetAsync(new KeysComparer());
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualSet.has(x));
+  expect(actualSet.has(new Key(firstKey.hi, firstKey.lo))).toBeTrue();
 });
 
 test("Should convert manipula to set of complex type using default comparer asynchronously", async () => {
@@ -175,6 +175,62 @@ test("Should convert manipula to map of complex type using default comparer", ()
 
   // When
   const actualMap = manipula.toMap(
+    x => {
+      return { hi: x, lo: x };
+    },
+    { elementSelector: x => x + 1 }
+  );
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualMap.get({ hi: x, lo: x }) === x + 1);
+});
+
+test("Should convert manipula to map of primitive type asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2, 3, 4, 5];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualMap = await manipula.toMapAsync(x => x, { elementSelector: x => x * x });
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualMap.get(x) === x * x);
+});
+
+test("Should convert manipula to map of primitive type passing elements selector as a second parameter asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2, 3, 4, 5];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualMap = await manipula.toMapAsync(x => x, x => x * x);
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualMap.get(x) === x * x);
+});
+
+test("Should convert manipula to map of complex type using external comparer asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualMap = await manipula.toMapAsync(x => new Key(x, x), {
+    elementSelector: x => x + 1,
+    comparer: new KeysComparer()
+  });
+
+  // Then
+  expect(sourceArray).toSatisfyAll(x => actualMap.get(new Key(x, x)) === x + 1);
+});
+
+test("Should convert manipula to map of complex type using default comparer asynchronously", async () => {
+  // Given
+  const sourceArray = [1, 2];
+  const manipula = Manipula.from(sourceArray);
+
+  // When
+  const actualMap = await manipula.toMapAsync(
     x => {
       return { hi: x, lo: x };
     },
