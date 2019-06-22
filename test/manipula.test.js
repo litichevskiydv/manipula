@@ -1050,6 +1050,15 @@ describe("Should test take", () => {
       source: Manipula.from([1, 2, 3]),
       count: -1,
       expected: []
+    },
+    {
+      toString: () => "Take a few elements from an infinite sequence",
+      source: Manipula.from((function* () {
+        let counter = 1;
+        while (true) yield counter++;
+      })()),
+      count: 2,
+      expected: [1, 2] 
     }
   ];
 
