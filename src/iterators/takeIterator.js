@@ -13,6 +13,9 @@ module.exports = class TakeIterator extends Manipula {
 
   *[Symbol.iterator]() {
     let i = 0;
-    for (const element of this._source) if (i++ < this._count) yield element;
+    for (const element of this._source) {
+      if (i++ >= this._count) break;
+      yield element;
+    }
   }
 };
