@@ -418,6 +418,34 @@ describe("Should test distinct", () => {
       toString: () => "Distincting collections of complex type using default comparer",
       source: Manipula.from([{ hi: 1, lo: 1 }, { hi: 2, lo: 2 }, { hi: 2, lo: 2 }, { hi: 1, lo: 1 }]),
       expected: [{ hi: 1, lo: 1 }, { hi: 2, lo: 2 }]
+    },
+    {
+      toString: () => "Distincting collections of complex type with different keys order using default comparer",
+      source: Manipula.from([
+        {
+          Friday: "15:00",
+          Monday: "15:00",
+          Thursday: "15:00",
+          Tuesday: "15:00",
+          Wednesday: "15:00"
+        },
+        {
+          Monday: "15:00",
+          Thursday: "15:00",
+          Friday: "15:00",
+          Tuesday: "15:00",
+          Wednesday: "15:00"
+        }
+      ]),
+      expected: [
+        {
+          Friday: "15:00",
+          Monday: "15:00",
+          Thursday: "15:00",
+          Tuesday: "15:00",
+          Wednesday: "15:00"
+        }
+      ]
     }
   ];
 
@@ -1053,12 +1081,14 @@ describe("Should test take", () => {
     },
     {
       toString: () => "Take a few elements from an infinite sequence",
-      source: Manipula.from((function* () {
-        let counter = 1;
-        while (true) yield counter++;
-      })()),
+      source: Manipula.from(
+        (function*() {
+          let counter = 1;
+          while (true) yield counter++;
+        })()
+      ),
       count: 2,
-      expected: [1, 2] 
+      expected: [1, 2]
     }
   ];
 
