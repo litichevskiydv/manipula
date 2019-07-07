@@ -60,7 +60,7 @@ module.exports = class Manipula {
   /**
    * Method batches the source iterable into sized buckets and applies a projection to each bucket.
    * @param {number} size Buket size.
-   * @param {batchResultSelector} resultSelector The projection to apply to each bucket.
+   * @param {batchResultSelector} [resultSelector] The projection to apply to each bucket.
    */
   batch(size, resultSelector) {
     return new BatchIterator(this, size, resultSelector || (x => x));

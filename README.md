@@ -38,6 +38,7 @@ Implementation of LINQ
     - [.reverse()](https://github.com/litichevskiydv/manipula/wiki/reverse)
     - [.select(selector)](https://github.com/litichevskiydv/manipula/wiki/select)
     - [.selectMany(selector)](https://github.com/litichevskiydv/manipula/wiki/selectMany)
+    - [.batch(size, [resultSelector])](https://github.com/litichevskiydv/manipula/wiki/batch)
     - [.sequenceEqual(second, [comparer])](https://github.com/litichevskiydv/manipula/wiki/sequenceEqual) : <code>boolean</code>
     - [.single([predicate])](https://github.com/litichevskiydv/manipula/wiki/single)
     - [.singleOrDefault([predicate])](https://github.com/litichevskiydv/manipula/wiki/singleOrDefault)
@@ -60,5 +61,6 @@ Implementation of LINQ
     - [.where(predicate)](https://github.com/litichevskiydv/manipula/wiki/where)
   - _static_
     - [.from(source)](https://github.com/litichevskiydv/manipula/wiki/from)
+    - [.fromGeneratorFunction(fn, ..args)](https://github.com/litichevskiydv/manipula/wiki/fromGeneratorFunction)
     - [.range(start, count)](https://github.com/litichevskiydv/manipula/wiki/range)
     - [.repeat(element, count)](https://github.com/litichevskiydv/manipula/wiki/repeat)
