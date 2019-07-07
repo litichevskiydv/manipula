@@ -293,6 +293,50 @@ describe("Should test selectMany", () => {
   });
 });
 
+describe("Should test batch", () => {
+  const testCases = [
+    {
+      toString: () => "Size of the collection is divided by the size of the bucket",
+      source: Manipula.from([0, 1, 2, 3]),
+      size: 2,
+      expected: [[0, 1], [2, 3]]
+    },
+    {
+      toString: () => "Size of the collection is not divided by the size of the bucket",
+      source: Manipula.from([0, 1, 2, 3, 4]),
+      size: 3,
+      expected: [[0, 1, 2], [3, 4]]
+    }
+  ];
+
+  test.each(testCases)("%s", testCase => {
+    // When
+    const actual = testCase.source.batch(testCase.size, testCase.resultSelector);
+
+    // Then
+    expect(actual.length).toBe(testCase.expected.length);
+
+    let i = 0;
+    for (const actualBucket of actual) {
+      expect(actualBucket.length).toBe(testCase.expected[i].length);
+      expect(actualBucket.toArray()).toEqual(testCase.expected[i++]);
+    }
+  });
+});
+
+test("Should calculate buckets sum", () => {
+  // Given
+  const source = Manipula.from([0, 1, 2, 3, 4]);
+  const size = 2;
+
+  // When
+  const actual = source.batch(size, x => x.sum()).toArray();
+
+  // Then
+  const expected = [1, 5, 4];
+  expect(actual).toEqual(expected);
+});
+
 describe("Should test where", () => {
   const testCases = [
     {

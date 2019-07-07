@@ -45,6 +45,15 @@ module.exports = class Manipula {
   }
 
   /**
+   * Method batches the source iterable into sized buckets and applies a projection to each bucket.
+   * @param {number} size Buket size.
+   * @param {batchResultSelector} resultSelector The projection to apply to each bucket.
+   */
+  batch(size, resultSelector) {
+    return new BatchIterator(this, size, resultSelector || (x => x));
+  }
+
+  /**
    * Method filters an iterable based on a predicate.
    * @param {extendedLogicalPredicate} predicate A function to test each source element and its number for a condition.
    * @returns {WhereIterator}
@@ -598,6 +607,7 @@ module.exports = class Manipula {
 const FromIterator = require("./iterators/fromIterator");
 const SelectIterator = require("./iterators/selectIterator");
 const SelectManyIterator = require("./iterators/selectManyIterator");
+const BatchIterator = require("./iterators/batchIterator");
 const WhereIterator = require("./iterators/whereIterator");
 const ConcatIterator = require("./iterators/concatIterator");
 const AppendIterator = require("./iterators/appendIterator");
@@ -637,6 +647,12 @@ const OrderByIterator = require("./iterators/orderByIterator");
  * @param {*} element The element of an iterable.
  * @param {number} elementNumber Number of the iterable element.
  * @returns {Iterable<any>} Element transformation result.
+ */
+
+/**
+ * @callback batchResultSelector
+ * @param {Iterable<any>} bucket Bucket elements.
+ * @returns {*} Bucket transformation result.
  */
 
 /**

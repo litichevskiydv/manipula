@@ -270,6 +270,19 @@ export interface IEnumerable<T> extends Iterable<T> {
   selectMany<TResult>(selector: (element: T, index: number) => Iterable<TResult>): IEnumerable<TResult>;
 
   /**
+   * Method batches the source iterable into sized buckets and applies a projection to each bucket.
+   * @param size Buket size.
+   */
+  batch(size: number): IEnumerable<IEnumerable<T>>;
+
+  /**
+   * Method batches the source iterable into sized buckets and applies a projection to each bucket.
+   * @param size Buket size.
+   * @param resultSelector The projection to apply to each bucket.
+   */
+  batch<TResult>(size: number, resultSelector: (bucket: IEnumerable<T>) => TResult): IEnumerable<TResult>;
+
+  /**
    * Method determines whether two iterables are equal according to an equality comparer.
    * @param second An iterable to compare to the current iterable.
    */
