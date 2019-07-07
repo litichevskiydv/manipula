@@ -531,6 +531,13 @@ declare namespace Collections {
 export function from<T>(source: Iterable<T>): IEnumerable<T>;
 
 /**
+ * Method wraps generator function for providing extended functionality.
+ * @param fn Generator function.
+ * @param args Generator function arguments.
+ */
+export function fromGeneratorFunction<T>(fn: (...args: any[]) => Iterator<T>, ...args: any[]): IEnumerable<T>;
+
+/**
  * Method generates an iterable of integral numbers within a specified range.
  * @param start The value of the first integer in the iterable.
  * @param count The number of sequential integers to generate.

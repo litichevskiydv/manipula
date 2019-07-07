@@ -27,6 +27,19 @@ module.exports = class Manipula {
   }
 
   /**
+   * Method wraps generator function for providing extended functionality.
+   * @param {GeneratorFunction} fn Generator function.
+   * @param  {...any} args Generator function arguments.
+   */
+  static fromGeneratorFunction(fn, ...args) {
+    return new FromIterator({
+      *[Symbol.iterator]() {
+        yield* fn(...args);
+      }
+    });
+  }
+
+  /**
    * Method projects each element of an iterable into new form.
    * @param {selectSelector} selector A transform function to apply to each source element.
    * @returns {SelectIterator}

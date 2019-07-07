@@ -20,6 +20,22 @@ class KeysComparer {
   }
 }
 
+test("Should create manipula from generator function", () => {
+  // Given
+  const expectedCount = 10;
+  const generator = function*(count) {
+    let i = 0;
+    while (i < count) yield i++;
+  };
+
+  // When
+  const source = Manipula.fromGeneratorFunction(generator, expectedCount);
+
+  // Then
+  expect(source.count()).toBe(expectedCount);
+  expect(source.count()).toBe(expectedCount);
+});
+
 test("Should convert manipula to array", () => {
   // Given
   const expectedArray = [1, 2, 3, 4, 5];
