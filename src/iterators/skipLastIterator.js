@@ -16,13 +16,8 @@ module.exports = class SkipLastIterator extends Manipula {
     else {
       const queue = [];
       const iterator = this._source[Symbol.iterator]();
-      for (let i = 0; i < this._count; i++) {
-        const currentState = iterator.next();
-        if (currentState.done) return;
-        queue.push(currentState.value);
-      }
-      for (let currentState = iterator.next(); currentState.done === false; currentState = iterator.next()) {
-        yield queue.shift();
+      for (let currentState = iterator.next(); !currentState.done; currentState = iterator.next()) {
+        if (queue.length === this._count) yield queue.shift();
         queue.push(currentState.value);
       }
     }
