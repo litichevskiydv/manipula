@@ -13,17 +13,12 @@ module.exports = class TakeLastIterator extends Manipula {
 
   *[Symbol.iterator]() {
     if (this._count <= 0) return;
-
     const queue = [];
     const iterator = this._source[Symbol.iterator]();
-    for (let currentState = iterator.next(); currentState.done === false; currentState = iterator.next())
-      if (queue.length === this._count)
-        for (; currentState.done === false; currentState = iterator.next()) {
-          queue.shift();
-          queue.push(currentState.value);
-        }
-      else queue.push(currentState.value);
-
-    for (const element of queue) yield element;
+    for (let currentState = iterator.next(); !currentState.done; currentState = iterator.next()) {
+      if (queue.length === this._count) queue.shift();
+      queue.push(currentState.value);
+    }
+    yield* queue;
   }
 };
