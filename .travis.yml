@@ -5,15 +5,18 @@ node_js:
   - "12"
   - lts/*
   - node
+install: npm ci
 script:
   - npm test
 jobs:
   include:
     - stage: coverage
       node_js: lts/*
+      install: npm ci
       script: jest --coverage --coverageReporters=text-lcov | coveralls
     - stage: deploy
       node_js: lts/*
+      install: npm ci
       script: skip
       deploy:
         provider: npm

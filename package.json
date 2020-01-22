@@ -27,6 +27,12 @@
     "url": "https://github.com/litichevskiydv/manipula/issues"
   },
   "homepage": "https://github.com/litichevskiydv/manipula#readme",
+  "dependencies": {
+    "collectio-hashmap": "1.0.1",
+    "collectio-hashset": "1.0.1",
+    "equality-comparison": "1.0.4",
+    "partitioned-loops": "1.0.0"
+  },
   "devDependencies": {
     "coveralls": "3.0.2",
     "jest": "23.6.0",
@@ -35,11 +41,5 @@
   "jest": {
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "jest-extended"
-  },
-  "dependencies": {
-    "collectio-hashmap": "1.0.1",
-    "collectio-hashset": "1.0.1",
-    "equality-comparison": "1.0.4",
-    "partitioned-loops": "1.0.0"
   }
 }
