@@ -31,7 +31,7 @@
     "collectio-hashmap": "^1.0.1",
     "collectio-hashset": "^1.0.1",
     "equality-comparison": "^1.0.4",
-    "partitioned-loops": "^1.0.0"
+    "partitioned-loops": "^1.0.1"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",
