@@ -34,10 +34,10 @@
     "partitioned-loops": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^25.1.1",
     "coveralls": "^3.0.9",
-    "jest": "^24.9.0",
-    "jest-extended": "^0.11.2"
+    "jest": "^25.1.0",
+    "jest-extended": "^0.11.5"
   },
   "jest": {
     "testEnvironment": "node",
