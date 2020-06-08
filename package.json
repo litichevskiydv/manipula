@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/litichevskiydv/manipula#readme",
   "dependencies": {
-    "collectio-hashmap": "^1.0.1",
-    "collectio-hashset": "^1.0.1",
-    "equality-comparison": "^1.0.4",
-    "partitioned-loops": "^1.0.1"
+    "collectio-hashmap": "^1.0.2",
+    "collectio-hashset": "^1.0.2",
+    "equality-comparison": "^1.0.5",
+    "partitioned-loops": "^1.0.2"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
