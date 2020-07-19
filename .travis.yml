@@ -16,7 +16,7 @@ jobs:
       install: npm ci
       script: jest --coverage --coverageReporters=text-lcov | coveralls
     - stage: deploy
-      if: branch = master && commit_message !~ /no-deploy/
+      if: type != pull_request && branch = master && commit_message !~ /no-deploy/
       node_js: lts/*
       install: npm ci
       script: skip
