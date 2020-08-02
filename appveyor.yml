@@ -1,0 +1,17 @@
+skip_commits:
+  files:
+    - LICENSE
+    - README.md
+    - .travis.yml
+environment:
+  matrix:
+    - nodejs_version: "10"
+    - nodejs_version: "12"
+    - nodejs_version: "13"
+    - nodejs_version: "14"
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
+build: off
+test_script:
+  - npm test
