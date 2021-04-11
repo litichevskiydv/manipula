@@ -37,9 +37,8 @@
     "partitioned-loops": "^1.0.2"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.5",
-    "coveralls": "^3.1.0",
-    "jest": "^26.1.0",
+    "@types/jest": "^26.0.22",
+    "jest": "^26.6.3",
     "jest-extended": "^0.11.5"
   },
   "jest": {
