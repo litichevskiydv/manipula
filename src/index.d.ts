@@ -459,6 +459,12 @@ export interface IEnumerable<T> extends Iterable<T> {
    * Method filters an iterable based on a predicate.
    * @param predicate A function to test each source element and its number for a condition.
    */
+  where<TResult extends T>(predicate: (element: T, index: number) => element is TResult): IEnumerable<TResult>;
+
+  /**
+   * Method filters an iterable based on a predicate.
+   * @param predicate A function to test each source element and its number for a condition.
+   */
   where(predicate: (element: T, index: number) => boolean): IEnumerable<T>;
 }
 
