@@ -1,6 +1,6 @@
 {
   "name": "manipula",
-  "version": "1.2.12",
+  "version": "1.3.12",
   "description": "Implementation of LINQ",
   "engines": {
     "node": ">=8"
