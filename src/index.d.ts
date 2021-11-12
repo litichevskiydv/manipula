@@ -109,7 +109,7 @@ export interface IEnumerable<T> extends Iterable<T> {
    * Method returns the element at a specified index in an iterable or null if the index is out of range.
    * @param index The zero-based index of the element to retrieve.
    */
-  elementAtOrDefault(index: number): ?T;
+  elementAtOrDefault(index: number): T | null;
 
   /**
    * Method returns differences between current and given iterables.
@@ -136,12 +136,12 @@ export interface IEnumerable<T> extends Iterable<T> {
   /**
    * Method returns the first element of an iterable that satisfies a condition or null if no such element is found.
    */
-  firstOrDefault(): ?T;
+  firstOrDefault(): T | null;
   /**
    * Method returns the first element of an iterable that satisfies a condition or null if no such element is found.
    * @param predicate A function to test each element for a condition.
    */
-  firstOrDefault(predicate: (element: T) => boolean): ?T;
+  firstOrDefault(predicate: (element: T) => boolean): T | null;
 
   /**
    * Method groups the elements of an iterable.
@@ -195,12 +195,12 @@ export interface IEnumerable<T> extends Iterable<T> {
   /**
    * Method returns the last element of an iterable that satisfies a condition or null if no such element is found.
    */
-  lastOrDefault(): ?T;
+  lastOrDefault(): T | null;
   /**
    * Method returns the last element of an iterable that satisfies a condition or null if no such element is found.
    * @param predicate A function to test each element for a condition.
    */
-  lastOrDefault(predicate: (element: T) => boolean): ?T;
+  lastOrDefault(predicate: (element: T) => boolean): T | null;
 
   /**
    * Method invokes a transform function on each element of an iterable and returns the maximum resulting value.
@@ -307,12 +307,12 @@ export interface IEnumerable<T> extends Iterable<T> {
   /**
    * Method returns the only element of an iterable that satisfies a specified condition or null if no such element exists; this method throws an exception if more than one element satisfies the condition.
    */
-  singleOrDefault(): ?T;
+  singleOrDefault(): T | null;
   /**
    * Method returns the only element of an iterable that satisfies a specified condition or null if no such element exists; this method throws an exception if more than one element satisfies the condition.
    * @param predicate A function to test an element for a condition.
    */
-  singleOrDefault(predicate: (element: T) => boolean): ?T;
+  singleOrDefault(predicate: (element: T) => boolean): T | null;
 
   /**
    * Method bypasses a specified number of elements in a iterable and then returns the remaining elements.
