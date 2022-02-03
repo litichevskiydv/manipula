@@ -509,7 +509,7 @@ interface IOrderedEnumerable<T> extends IEnumerable<T> {
 declare namespace Collections {
   export interface IMap<TKey, TValue> extends Iterable<[TKey, TValue]> {
     readonly size: number;
-    get(key: TKey): TValue;
+    get(key: TKey): TValue | undefined;
     set(key: TKey, value: TValue): IMap<TKey, TValue>;
     has(key: TKey): boolean;
     delete(key: TKey): boolean;
