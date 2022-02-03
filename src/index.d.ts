@@ -12,7 +12,7 @@ export interface IEnumerable<T> extends Iterable<T> {
    */
   aggregate<TResult>(
     initialValue: TResult,
-    aggregateFunction: (accumulator: TResult, element: T, index: number) => T
+    aggregateFunction: (accumulator: TResult, element: T, index: number) => TResult
   ): TResult;
 
   /**
